@@ -3,321 +3,739 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pure Play Rentals — Bounce Houses & Party Inflatables</title>
-  <meta name="description" content="Book a bounce house, pick your banner, choose your date. Pure Play Rentals — the easiest party rental booking in town."/>
+  <title>Pure Play Rentals — Bounce House & Inflatable Party Rentals</title>
+  <meta name="description" content="Premium bounce house and inflatable party rentals. Book online in minutes — choose your inflatable, banner, date, and pay securely."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --blue:#1a3a6b;
-      --sky:#5bc8f5;
-      --orange:#f7941d;
-      --pink:#f06292;
-      --green:#8dc63f;
-      --yellow:#ffd600;
-      --bg:#f0f8ff;
-      --text:#1a2a4a;
+      --navy:   #1a3a6b;
+      --navy2:  #0f2549;
+      --orange: #f7941d;
+      --orange2:#e07c0a;
+      --sky:    #38bdf8;
+      --green:  #22c55e;
+      --bg:     #f8fafc;
+      --white:  #ffffff;
+      --text:   #1e293b;
+      --muted:  #64748b;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+      --shadow:    0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.1), 0 4px 12px rgba(0,0,0,.06);
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
-    h1,h2,h3,h4{font-family:'Baloo 2',cursive}
 
-    /* Clay */
-    .clay{background:#fff;border-radius:20px;border:3px solid var(--blue);box-shadow:5px 5px 0 var(--blue);transition:transform .15s,box-shadow .15s}
-    .clay:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--blue)}
-    .clay-sm{border-radius:14px;border:2.5px solid var(--blue);box-shadow:3px 3px 0 var(--blue)}
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1,h2,h3,h4,h5 { font-family: 'Poppins', sans-serif; line-height: 1.2; }
 
-    /* Buttons */
-    .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Baloo 2',cursive;font-weight:700;border-radius:50px;border:3px solid var(--blue);cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s}
-    .btn:hover{transform:translate(-2px,-2px)}
-    .btn:active{transform:translate(2px,2px)}
-    .btn-orange{background:var(--orange);color:#fff;box-shadow:4px 4px 0 var(--blue)}
-    .btn-orange:hover{box-shadow:6px 6px 0 var(--blue)}
-    .btn-blue{background:var(--blue);color:#fff;box-shadow:4px 4px 0 #0a1f3d}
-    .btn-blue:hover{box-shadow:6px 6px 0 #0a1f3d}
-    .btn-white{background:#fff;color:var(--text);box-shadow:4px 4px 0 var(--blue)}
-    .btn-white:hover{box-shadow:6px 6px 0 var(--blue)}
+    /* ── NAV ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: box-shadow .3s;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+    .nav-logo img { height: 44px; width: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: 'Poppins', sans-serif; font-weight: 500; font-size: .9rem;
+      color: var(--text); text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-cta {
+      background: var(--orange); color: #fff;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .9rem;
+      padding: 10px 24px; border-radius: 8px; text-decoration: none;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 2px 8px rgba(247,148,29,.35);
+    }
+    .nav-cta:hover { background: var(--orange2); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(247,148,29,.4); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
 
-    /* Nav */
-    nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:calc(100% - 28px);max-width:1100px;z-index:100;background:#fff;border:3px solid var(--blue);border-radius:50px;box-shadow:4px 4px 0 var(--blue);display:flex;align-items:center;justify-content:space-between;padding:8px 20px}
-    .nav-links{display:flex;align-items:center;gap:24px;list-style:none}
-    .nav-links a{font-family:'Baloo 2',cursive;font-weight:600;font-size:.92rem;color:var(--text);text-decoration:none;transition:color .2s}
-    .nav-links a:hover{color:var(--orange)}
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif; font-weight: 600;
+      border-radius: 8px; cursor: pointer; text-decoration: none;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      border: none; outline: none;
+    }
+    .btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+    .btn-primary {
+      background: var(--orange); color: #fff;
+      box-shadow: 0 2px 8px rgba(247,148,29,.35);
+    }
+    .btn-primary:hover { background: var(--orange2); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(247,148,29,.4); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-navy { background: var(--navy); color: #fff; box-shadow: var(--shadow-sm); }
+    .btn-navy:hover { background: var(--navy2); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--navy); color: var(--navy); background: #f1f5f9; }
+    .btn-lg { padding: 14px 32px; font-size: 1rem; border-radius: 10px; }
+    .btn-md { padding: 11px 24px; font-size: .9rem; }
+    .btn-sm { padding: 8px 18px; font-size: .85rem; }
 
-    /* Step wizard */
-    .step-bar{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:36px}
-    .step-dot{width:42px;height:42px;border-radius:50%;border:3px solid var(--blue);font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;display:flex;align-items:center;justify-content:center;background:#fff;color:var(--blue);transition:background .3s,color .3s;flex-shrink:0;cursor:default}
-    .step-dot.active{background:var(--orange);color:#fff;border-color:var(--blue);box-shadow:3px 3px 0 var(--blue)}
-    .step-dot.done{background:var(--green);color:#fff;border-color:var(--blue)}
-    .step-line{height:3px;width:48px;background:#d0e4f7;flex-shrink:0}
-    .step-line.done{background:var(--green)}
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 24px 60px;
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #0f2549 0%, #1a3a6b 50%, #1e4080 100%);
+    }
+    .hero-grid {
+      max-width: 1140px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(247,148,29,.15); border: 1px solid rgba(247,148,29,.3);
+      color: #fbbf24; font-size: .82rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 50px; margin-bottom: 20px;
+      letter-spacing: .03em;
+    }
+    .hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 800; color: #fff; margin-bottom: 20px; }
+    .hero h1 span { color: var(--orange); }
+    .hero p { font-size: 1.05rem; color: #94a3b8; line-height: 1.75; margin-bottom: 36px; max-width: 480px; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 48px; }
+    .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+    .hero-stat-val { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 800; color: #fff; display: block; }
+    .hero-stat-label { font-size: .8rem; color: #64748b; font-weight: 500; }
 
-    /* House select cards */
-    .house-card{background:#fff;border-radius:20px;border:3px solid var(--blue);box-shadow:5px 5px 0 var(--blue);cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s;overflow:hidden;position:relative}
-    .house-card:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--blue)}
-    .house-card.selected{border-color:var(--orange);box-shadow:5px 5px 0 var(--orange);transform:translate(-2px,-2px)}
-    .house-card .check-badge{display:none;position:absolute;top:12px;right:12px;width:30px;height:30px;background:var(--orange);border-radius:50%;border:2.5px solid var(--blue);align-items:center;justify-content:center}
-    .house-card.selected .check-badge{display:flex}
+    /* Hero visual */
+    .hero-visual {
+      display: flex; justify-content: center; align-items: center; position: relative;
+    }
+    .hero-card-stack { position: relative; width: 100%; max-width: 420px; }
+    .hero-main-card {
+      background: #fff; border-radius: 20px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.3);
+      overflow: hidden;
+    }
+    .hero-card-img {
+      background: linear-gradient(135deg, #dbeafe 0%, #fce7f3 100%);
+      height: 220px; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-card-body { padding: 20px 24px; }
+    .hero-card-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+    .hero-card-body p { font-size: .85rem; color: var(--muted); margin-bottom: 14px; }
+    .hero-card-row { display: flex; align-items: center; justify-content: space-between; }
+    .price-tag { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--orange); }
+    /* Floating badges */
+    .float-badge {
+      position: absolute;
+      background: #fff; border-radius: 12px;
+      padding: 10px 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .82rem;
+      animation: float-badge 4s ease-in-out infinite;
+    }
+    @keyframes float-badge {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
 
-    /* Banner cards */
-    .banner-opt{border:3px solid var(--blue);border-radius:14px;padding:14px 16px;cursor:pointer;background:#fff;box-shadow:3px 3px 0 var(--blue);transition:transform .15s,border-color .15s;display:flex;align-items:center;gap:12px}
-    .banner-opt:hover{transform:translate(-1px,-1px)}
-    .banner-opt.selected{border-color:var(--orange);box-shadow:3px 3px 0 var(--orange);background:#fff7ed}
+    /* ── SECTION BASE ── */
+    .section { padding: 96px 24px; }
+    .section-inner { max-width: 1140px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .eyebrow {
+      display: inline-block; font-size: .78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--orange); margin-bottom: 10px;
+    }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; margin-bottom: 14px; color: var(--navy); }
+    .section-sub { font-size: 1rem; color: var(--muted); max-width: 500px; margin: 0 auto; line-height: 1.7; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--navy2); padding: 20px 24px;
+    }
+    .trust-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-around;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .trust-item { display: flex; align-items: center; gap: 10px; color: #94a3b8; font-size: .88rem; font-weight: 500; }
+    .trust-item svg { flex-shrink: 0; }
+
+    /* ── HOUSES ── */
+    .houses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .house-card {
+      background: var(--white); border-radius: 16px;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow); overflow: hidden;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      display: flex; flex-direction: column;
+      cursor: default;
+    }
+    .house-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
+    .house-img {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .house-badge {
+      position: absolute; top: 14px; left: 14px;
+      background: var(--navy); color: #fff;
+      font-size: .72rem; font-weight: 700; padding: 4px 12px;
+      border-radius: 50px; letter-spacing: .04em;
+    }
+    .house-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .house-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .house-desc { font-size: .88rem; color: var(--muted); line-height: 1.65; margin-bottom: 16px; flex: 1; }
+    .house-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .tag {
+      font-size: .75rem; font-weight: 600; padding: 3px 10px;
+      border-radius: 50px; background: #f1f5f9; color: #475569;
+    }
+    .house-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--border); }
+    .house-price { font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--navy); }
+    .house-price span { font-size: .8rem; color: var(--muted); font-weight: 500; }
+
+    /* ── HOW IT WORKS ── */
+    .hiw-section { background: var(--navy); }
+    .hiw-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
+    .hiw-grid::before {
+      content: ''; position: absolute;
+      top: 32px; left: calc(12.5% + 16px); right: calc(12.5% + 16px);
+      height: 1px; background: rgba(255,255,255,.12);
+    }
+    .hiw-item { text-align: center; }
+    .hiw-num {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(247,148,29,.15); border: 2px solid rgba(247,148,29,.4);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--orange);
+    }
+    .hiw-item h4 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .hiw-item p { font-size: .87rem; color: #94a3b8; line-height: 1.65; }
+
+    /* ── BOOKING WIZARD ── */
+    .book-section { background: #f1f5f9; }
+    .wizard-wrap {
+      background: var(--white); border-radius: 20px;
+      box-shadow: var(--shadow-lg); overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .wizard-header { padding: 28px 36px; border-bottom: 1px solid var(--border); background: #fafafa; }
+    .wizard-header h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
+    .wizard-header p { font-size: .88rem; color: var(--muted); }
+
+    /* Progress */
+    .progress-bar { display: flex; align-items: center; padding: 20px 36px; border-bottom: 1px solid var(--border); gap: 0; }
+    .prog-step { display: flex; align-items: center; gap: 0; flex: 1; }
+    .prog-step:last-child { flex: 0; }
+    .prog-dot {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: .88rem;
+      background: #e2e8f0; color: #94a3b8; transition: background .3s, color .3s;
+    }
+    .prog-dot.active { background: var(--orange); color: #fff; box-shadow: 0 2px 10px rgba(247,148,29,.4); }
+    .prog-dot.done { background: var(--green); color: #fff; }
+    .prog-dot.done svg { display: block; }
+    .prog-label { display: flex; flex-direction: column; margin-left: 10px; }
+    .prog-label span:first-child { font-size: .72rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: .06em; }
+    .prog-label span:last-child { font-size: .88rem; font-weight: 600; color: var(--text); }
+    .prog-line { flex: 1; height: 1px; background: #e2e8f0; margin: 0 12px; }
+    .prog-line.done { background: var(--green); }
+
+    .wizard-body { padding: 36px; }
+
+    /* House selection in wizard */
+    .wiz-houses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .wiz-house {
+      border: 2px solid var(--border); border-radius: 12px; overflow: hidden;
+      cursor: pointer; transition: border-color .2s, box-shadow .2s;
+      position: relative;
+    }
+    .wiz-house:hover { border-color: #94a3b8; }
+    .wiz-house.selected { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(247,148,29,.15); }
+    .wiz-house-img { height: 130px; display: flex; align-items: center; justify-content: center; }
+    .wiz-house-info { padding: 14px; border-top: 1px solid var(--border); }
+    .wiz-house-info h4 { font-size: .92rem; font-weight: 700; margin-bottom: 2px; }
+    .wiz-house-info p { font-size: .78rem; color: var(--muted); }
+    .wiz-house-info .wiz-price { font-family: 'Poppins', sans-serif; font-weight: 800; color: var(--orange); font-size: 1.05rem; margin-top: 4px; }
+    .sel-check {
+      display: none; position: absolute; top: 10px; right: 10px;
+      width: 26px; height: 26px; background: var(--orange); border-radius: 50%;
+      align-items: center; justify-content: center;
+    }
+    .wiz-house.selected .sel-check { display: flex; }
+
+    /* Banner options */
+    .banner-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .banner-opt {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 16px; border: 2px solid var(--border); border-radius: 10px;
+      cursor: pointer; transition: border-color .2s, background .2s;
+    }
+    .banner-opt:hover { border-color: #94a3b8; background: #fafafa; }
+    .banner-opt.selected { border-color: var(--orange); background: #fff8f0; }
+    .banner-icon {
+      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; background: #f1f5f9;
+    }
+    .banner-opt h5 { font-size: .92rem; font-weight: 600; margin-bottom: 2px; }
+    .banner-opt p { font-size: .78rem; color: var(--muted); }
+
+    .banner-preview-box {
+      background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 10px;
+      padding: 18px; text-align: center; margin-top: 16px;
+    }
+    .banner-preview-box .label { font-size: .75rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 10px; }
+    .banner-preview-inner {
+      display: inline-block; background: #ffd600;
+      padding: 8px 28px; border-radius: 6px;
+    }
+    .banner-preview-inner span { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1rem; color: var(--navy); }
 
     /* Calendar */
-    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-    .cal-day{border-radius:10px;border:2.5px solid transparent;padding:8px 4px;text-align:center;font-family:'Baloo 2',cursive;font-weight:600;font-size:.92rem;cursor:pointer;transition:background .15s,border-color .15s,transform .1s;min-height:42px;display:flex;align-items:center;justify-content:center}
-    .cal-day.available:hover{background:#fff7ed;border-color:var(--orange);transform:scale(1.05)}
-    .cal-day.selected{background:var(--orange);color:#fff;border-color:var(--blue);box-shadow:2px 2px 0 var(--blue)}
-    .cal-day.taken{background:#fee2e2;color:#9ca3af;cursor:not-allowed;text-decoration:line-through}
-    .cal-day.empty{cursor:default}
-    .cal-day.past{color:#d1d5db;cursor:not-allowed}
-
-    /* Payment form */
-    .form-input{width:100%;padding:12px 16px;border:3px solid var(--blue);border-radius:12px;font-family:'Nunito',sans-serif;font-size:1rem;background:#fff;color:var(--text);outline:none;transition:box-shadow .15s,border-color .15s}
-    .form-input:focus{border-color:var(--orange);box-shadow:3px 3px 0 var(--orange)}
-    .form-label{display:block;font-family:'Baloo 2',cursive;font-weight:600;font-size:.9rem;margin-bottom:5px;color:var(--text)}
-
-    /* Card input icons */
-    .card-field{position:relative}
-    .card-field svg{position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none}
-
-    /* Section tag */
-    .section-tag{display:inline-block;font-family:'Baloo 2',cursive;font-weight:700;font-size:.8rem;padding:4px 14px;border-radius:50px;border:2px solid var(--blue);box-shadow:2px 2px 0 var(--blue);text-transform:uppercase;letter-spacing:.05em}
-
-    /* Stars */
-    .star{color:#fbbf24}
-
-    /* FAQ */
-    .faq-item{border:3px solid var(--blue);border-radius:16px;background:#fff;box-shadow:4px 4px 0 var(--blue);margin-bottom:12px;overflow:hidden}
-    .faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;font-family:'Baloo 2',cursive;font-weight:700;font-size:.98rem}
-    .faq-a{display:none;padding:0 20px 16px;font-size:.93rem;color:#374151;line-height:1.65;border-top:2px solid #e0f0ff}
-    .faq-item.open .faq-a{display:block}
-    .faq-icon{transition:transform .2s;flex-shrink:0}
-    .faq-item.open .faq-icon{transform:rotate(45deg)}
-
-    /* Confetti dots */
-    @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
-    .float{animation:float 4s ease-in-out infinite}
-    @keyframes bounce-slow{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    .bounce-anim{animation:bounce-slow 3s ease-in-out infinite}
-
-    @media(max-width:768px){
-      .nav-links{display:none}
-      .hide-mobile{display:none}
+    .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .cal-nav {
+      background: #f1f5f9; border: 1.5px solid var(--border); border-radius: 8px;
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .2s; font-size: .9rem;
     }
-    @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+    .cal-nav:hover { background: #e2e8f0; }
+    .cal-nav:disabled { opacity: .35; cursor: not-allowed; }
+    .cal-month { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .cal-weekday { text-align: center; font-size: .75rem; font-weight: 600; color: var(--muted); padding: 8px 0; }
+    .cal-day {
+      border-radius: 8px; height: 42px; display: flex; align-items: center; justify-content: center;
+      font-size: .88rem; font-weight: 500; transition: background .15s, color .15s;
+    }
+    .cal-day.avail { cursor: pointer; color: var(--text); }
+    .cal-day.avail:hover { background: #f1f5f9; }
+    .cal-day.selected { background: var(--orange); color: #fff; font-weight: 700; box-shadow: 0 2px 8px rgba(247,148,29,.35); }
+    .cal-day.taken { background: #fee2e2; color: #fca5a5; cursor: not-allowed; text-decoration: line-through; }
+    .cal-day.past { color: #cbd5e1; cursor: not-allowed; }
+    .cal-day.empty { cursor: default; }
+    .cal-day.today { border: 2px solid var(--sky); }
+    .cal-legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+    .cal-legend-item { display: flex; align-items: center; gap: 6px; font-size: .78rem; color: var(--muted); }
+    .cal-legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+    /* Inputs */
+    .input-wrap { margin-bottom: 16px; }
+    .input-label { display: block; font-size: .83rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .input-field {
+      width: 100%; padding: 11px 14px;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: .93rem; color: var(--text);
+      background: #fff; outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .input-field:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(247,148,29,.12); }
+    .input-field.error { border-color: #ef4444; }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* Order summary */
+    .order-summary {
+      background: #f8fafc; border: 1.5px solid var(--border); border-radius: 12px;
+      padding: 20px; margin-bottom: 20px;
+    }
+    .order-summary h4 { font-size: .88rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 14px; }
+    .order-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: .9rem; }
+    .order-row + .order-row { border-top: 1px solid var(--border); }
+    .order-row .key { color: var(--muted); font-weight: 500; }
+    .order-row .val { font-weight: 600; }
+    .order-total { border-top: 2px solid var(--border); margin-top: 8px; padding-top: 12px; }
+    .order-total .key { font-weight: 700; color: var(--text); }
+    .order-total .val { font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--orange); }
+    .order-deposit .val { color: var(--green); font-weight: 700; }
+
+    /* Security row */
+    .security-row {
+      display: flex; align-items: center; gap: 8px;
+      background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;
+      padding: 10px 14px; font-size: .82rem; color: #166534; font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    /* Success */
+    .success-screen { text-align: center; padding: 60px 36px; }
+    .success-icon {
+      width: 80px; height: 80px; background: #f0fdf4; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px; box-shadow: 0 4px 16px rgba(34,197,94,.2);
+    }
+    .success-screen h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: var(--navy); }
+    .success-screen p { font-size: .97rem; color: var(--muted); line-height: 1.7; max-width: 400px; margin: 0 auto 28px; }
+    .conf-card {
+      background: #f8fafc; border: 1.5px solid var(--border); border-radius: 12px;
+      padding: 20px; max-width: 360px; margin: 0 auto 28px; text-align: left;
+    }
+
+    /* Wizard footer */
+    .wizard-footer {
+      padding: 20px 36px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      background: #fafafa;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .review-card {
+      background: var(--white); border-radius: 14px;
+      border: 1.5px solid var(--border); padding: 24px;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .review-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .stars { display: flex; gap: 2px; margin-bottom: 14px; color: #fbbf24; }
+    .review-text { font-size: .92rem; color: #374151; line-height: 1.7; margin-bottom: 18px; font-style: italic; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .reviewer-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; color: #fff;
+      flex-shrink: 0;
+    }
+    .reviewer-name { font-weight: 600; font-size: .93rem; }
+    .reviewer-sub { font-size: .78rem; color: var(--muted); }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--white); }
+    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      border: 1.5px solid var(--border); border-radius: 12px;
+      background: #fff; margin-bottom: 10px; overflow: hidden;
+      transition: border-color .2s;
+    }
+    .faq-item:hover { border-color: #94a3b8; }
+    .faq-item.open { border-color: var(--orange); }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 20px; cursor: pointer;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .95rem;
+      user-select: none;
+    }
+    .faq-a { display: none; padding: 0 20px 18px; font-size: .9rem; color: #374151; line-height: 1.7; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-icon { transition: transform .25s; flex-shrink: 0; color: var(--muted); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--orange); }
+
+    /* ── CTA STRIP ── */
+    .cta-strip {
+      background: linear-gradient(135deg, var(--navy2), var(--navy));
+      padding: 64px 24px; text-align: center;
+    }
+    .cta-strip h2 { font-size: clamp(1.8rem,3.5vw,2.4rem); font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .cta-strip p { font-size: 1rem; color: #94a3b8; margin-bottom: 28px; }
+
+    /* ── FOOTER ── */
+    .footer { background: #0a1929; padding: 48px 24px 24px; }
+    .footer-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
+    .footer-brand img { height: 48px; margin-bottom: 14px; display: block; }
+    .footer-brand p { font-size: .87rem; color: #4b6080; line-height: 1.7; max-width: 260px; }
+    .footer-col h4 { font-family: 'Poppins', sans-serif; font-weight: 700; color: #e2e8f0; font-size: .9rem; margin-bottom: 14px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-col ul a { color: #4b6080; text-decoration: none; font-size: .87rem; transition: color .2s; }
+    .footer-col ul a:hover { color: var(--orange); }
+    .footer-bottom { max-width: 1140px; margin: 0 auto; padding-top: 24px; border-top: 1px solid #1a2a3d; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+    .footer-bottom p { font-size: .82rem; color: #334155; }
+
+    /* Mobile nav drawer */
+    .mobile-nav {
+      display: none; position: fixed; top: 68px; left: 0; right: 0;
+      background: #fff; border-bottom: 1px solid var(--border);
+      padding: 16px 24px; z-index: 199;
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav a {
+      display: block; padding: 12px 0;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .97rem;
+      color: var(--text); text-decoration: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav a:last-child { border: none; padding-top: 16px; }
+
+    /* Responsive */
+    @media(max-width: 1024px) {
+      .houses-grid { grid-template-columns: 1fr 1fr; }
+      .hiw-grid { grid-template-columns: 1fr 1fr; }
+      .hiw-grid::before { display: none; }
+    }
+    @media(max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .houses-grid { grid-template-columns: 1fr; }
+      .wiz-houses { grid-template-columns: 1fr; }
+      .banner-opts { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .wizard-header, .wizard-body, .wizard-footer { padding-left: 20px; padding-right: 20px; }
+      .progress-bar { padding: 16px 20px; gap: 0; overflow-x: auto; }
+      .prog-label { display: none; }
+      .hiw-grid { grid-template-columns: 1fr 1fr; }
+      .input-row { grid-template-columns: 1fr; }
+    }
+    @media(max-width: 480px) {
+      .hiw-grid { grid-template-columns: 1fr; }
+      .wiz-houses { grid-template-columns: 1fr; }
+    }
+    @media(prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none!important; animation: none!important; } }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" style="display:flex;align-items:center;">
-    <img src="pureplay.png" alt="Pure Play Rentals" style="height:48px;width:auto;"/>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="pureplay.png" alt="Pure Play Rentals"/>
   </a>
   <ul class="nav-links">
-    <li><a href="#houses">Bounce Houses</a></li>
-    <li><a href="#book">Book Now</a></li>
+    <li><a href="#houses">Our Houses</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#reviews">Reviews</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <a href="#book" class="btn btn-orange" style="padding:10px 22px;font-size:.9rem;">Book Now</a>
+  <a href="#book" class="nav-cta">Book Now</a>
+  <button class="hamburger" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
 </nav>
 
-<!-- HERO -->
-<section style="min-height:100vh;display:flex;align-items:center;padding:120px 24px 60px;position:relative;overflow:hidden;background:linear-gradient(160deg,#e8f4ff 0%,#fff9f0 60%,#f0fff4 100%)">
-  <!-- decorative circles -->
-  <div style="position:absolute;width:340px;height:340px;border-radius:50%;background:var(--sky);opacity:.12;top:-80px;right:-80px"></div>
-  <div style="position:absolute;width:220px;height:220px;border-radius:50%;background:var(--orange);opacity:.1;bottom:40px;left:-60px"></div>
-  <div class="float" style="position:absolute;width:28px;height:28px;background:var(--yellow);border:2.5px solid var(--blue);border-radius:6px;top:20%;left:6%;transform:rotate(20deg)"></div>
-  <div class="float" style="position:absolute;width:20px;height:20px;background:var(--pink);border:2.5px solid var(--blue);border-radius:50%;top:65%;right:10%;animation-delay:.8s"></div>
-  <div class="float" style="position:absolute;width:24px;height:24px;background:var(--green);border:2.5px solid var(--blue);border-radius:6px;top:35%;right:7%;animation-delay:1.5s;transform:rotate(-15deg)"></div>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#houses" onclick="closeMenu()">Our Houses</a>
+  <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
+  <a href="#reviews" onclick="closeMenu()">Reviews</a>
+  <a href="#faq" onclick="closeMenu()">FAQ</a>
+  <a href="#book" onclick="closeMenu()" style="color:var(--orange);">Book Now →</a>
+</div>
 
-  <div style="max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;" id="hero-grid">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
     <div>
-      <img src="pureplay.png" alt="Pure Play Rentals" style="max-width:320px;width:100%;margin-bottom:20px;"/>
-      <p style="font-size:1.15rem;line-height:1.75;color:#374151;margin-bottom:32px;max-width:460px;">
-        The easiest way to book a bounce house in town. Pick your house, pick your banner, pick your date — then party!
-      </p>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:36px;">
-        <a href="#book" class="btn btn-orange" style="padding:16px 36px;font-size:1.05rem;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <div class="hero-eyebrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        #1 Rated Party Rental Service
+      </div>
+      <h1>Make Every Party <span>Absolutely Unforgettable</span></h1>
+      <p>Premium bounce houses delivered, set up, and taken down at your door. Book in minutes — choose your house, banner, and date online.</p>
+      <div class="hero-btns">
+        <a href="#book" class="btn btn-primary btn-lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Book Your Party
         </a>
-        <a href="#houses" class="btn btn-white" style="padding:16px 28px;font-size:1.05rem;">See Our Houses</a>
+        <a href="#houses" class="btn btn-ghost btn-lg" style="color:#94a3b8;border-color:rgba(255,255,255,.2);">See Our Houses</a>
       </div>
-      <!-- Trust bar -->
-      <div style="display:flex;flex-wrap:wrap;gap:20px;">
-        <div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:.93rem;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#10b981" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          4.9 Stars
+      <div class="hero-stats">
+        <div>
+          <span class="hero-stat-val">500+</span>
+          <span class="hero-stat-label">Happy Families</span>
         </div>
-        <div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:.93rem;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Safety Certified
+        <div style="width:1px;background:rgba(255,255,255,.1);"></div>
+        <div>
+          <span class="hero-stat-val">4.9★</span>
+          <span class="hero-stat-label">Average Rating</span>
         </div>
-        <div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:.93rem;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          500+ Families
+        <div style="width:1px;background:rgba(255,255,255,.1);"></div>
+        <div>
+          <span class="hero-stat-val">6+</span>
+          <span class="hero-stat-label">Years in Business</span>
         </div>
       </div>
     </div>
 
-    <!-- Hero illustration -->
-    <div style="display:flex;justify-content:center;" class="bounce-anim">
-      <svg viewBox="0 0 420 380" style="width:100%;max-width:400px;" aria-label="Colorful bounce house" role="img">
-        <ellipse cx="210" cy="365" rx="180" ry="14" fill="var(--blue)" opacity=".1"/>
-        <!-- Body -->
-        <rect x="35" y="130" width="350" height="210" rx="28" fill="var(--orange)" stroke="var(--blue)" stroke-width="4"/>
-        <!-- Roof -->
-        <path d="M35 158 Q210 60 385 158Z" fill="var(--blue)" stroke="var(--blue)" stroke-width="4"/>
-        <path d="M75 158 Q210 88 345 158Z" fill="var(--sky)" stroke="var(--blue)" stroke-width="3"/>
-        <!-- Bounce floor -->
-        <rect x="55" y="235" width="310" height="82" rx="14" fill="#fff9c4" stroke="var(--blue)" stroke-width="3"/>
-        <!-- Entry door -->
-        <rect x="155" y="258" width="110" height="82" rx="14" fill="var(--blue)"/>
-        <rect x="160" y="263" width="100" height="74" rx="11" fill="#0d2a5e"/>
-        <!-- Side windows -->
-        <rect x="65" y="178" width="66" height="52" rx="10" fill="#bae6fd" stroke="var(--blue)" stroke-width="3"/>
-        <rect x="289" y="178" width="66" height="52" rx="10" fill="#bae6fd" stroke="var(--blue)" stroke-width="3"/>
-        <line x1="98" y1="178" x2="98" y2="230" stroke="var(--blue)" stroke-width="2"/>
-        <line x1="65" y1="204" x2="131" y2="204" stroke="var(--blue)" stroke-width="2"/>
-        <line x1="322" y1="178" x2="322" y2="230" stroke="var(--blue)" stroke-width="2"/>
-        <line x1="289" y1="204" x2="355" y2="204" stroke="var(--blue)" stroke-width="2"/>
-        <!-- Turrets -->
-        <rect x="22" y="100" width="66" height="68" rx="14" fill="var(--pink)" stroke="var(--blue)" stroke-width="4"/>
-        <rect x="332" y="100" width="66" height="68" rx="14" fill="var(--pink)" stroke="var(--blue)" stroke-width="4"/>
-        <polygon points="22,100 55,56 88,100" fill="var(--yellow)" stroke="var(--blue)" stroke-width="3"/>
-        <polygon points="332,100 365,56 398,100" fill="var(--yellow)" stroke="var(--blue)" stroke-width="3"/>
-        <!-- Flags -->
-        <line x1="55" y1="56" x2="55" y2="20" stroke="var(--blue)" stroke-width="3"/>
-        <polygon points="55,20 82,33 55,46" fill="var(--green)" stroke="var(--blue)" stroke-width="2"/>
-        <line x1="365" y1="56" x2="365" y2="20" stroke="var(--blue)" stroke-width="3"/>
-        <polygon points="365,20 392,33 365,46" fill="var(--orange)" stroke="var(--blue)" stroke-width="2"/>
-        <!-- Banner on body -->
-        <rect x="80" y="198" width="260" height="32" rx="8" fill="var(--yellow)" stroke="var(--blue)" stroke-width="2.5"/>
-        <text x="210" y="219" text-anchor="middle" font-family="'Baloo 2',cursive" font-size="14" font-weight="800" fill="var(--blue)">HAPPY BIRTHDAY! 🎉</text>
-        <!-- Kids -->
-        <circle cx="125" cy="225" r="14" fill="var(--yellow)" stroke="var(--blue)" stroke-width="2.5"/>
-        <rect x="117" y="239" width="16" height="22" rx="6" fill="var(--blue)" stroke="var(--blue)" stroke-width="2"/>
-        <circle cx="295" cy="220" r="14" fill="#fca5a5" stroke="var(--blue)" stroke-width="2.5"/>
-        <rect x="287" y="234" width="16" height="22" rx="6" fill="var(--pink)" stroke="var(--blue)" stroke-width="2"/>
-      </svg>
+    <!-- Visual card -->
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="hero-main-card">
+          <div class="hero-card-img">
+            <svg viewBox="0 0 320 200" style="width:260px;" aria-hidden="true">
+              <rect x="20" y="60" width="280" height="130" rx="20" fill="#f97316" stroke="#1a3a6b" stroke-width="3"/>
+              <path d="M20 82 Q160 20 300 82Z" fill="#1a3a6b"/>
+              <path d="M48 82 Q160 36 272 82Z" fill="#38bdf8" opacity=".7"/>
+              <rect x="120" y="118" width="80" height="72" rx="10" fill="#0f2549"/>
+              <rect x="30" y="86" width="56" height="40" rx="8" fill="#bae6fd" stroke="#1a3a6b" stroke-width="2"/>
+              <rect x="234" y="86" width="56" height="40" rx="8" fill="#bae6fd" stroke="#1a3a6b" stroke-width="2"/>
+              <rect x="28" y="55" width="56" height="52" rx="10" fill="#f06292" stroke="#1a3a6b" stroke-width="2.5"/>
+              <rect x="236" y="55" width="56" height="52" rx="10" fill="#f06292" stroke="#1a3a6b" stroke-width="2.5"/>
+              <polygon points="28,55 56,18 84,55" fill="#ffd600" stroke="#1a3a6b" stroke-width="2"/>
+              <polygon points="236,55 264,18 292,55" fill="#ffd600" stroke="#1a3a6b" stroke-width="2"/>
+              <rect x="60" y="135" width="200" height="26" rx="6" fill="#ffd600"/>
+              <text x="160" y="153" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="800" fill="#1a3a6b">HAPPY BIRTHDAY!</text>
+            </svg>
+          </div>
+          <div class="hero-card-body">
+            <h3>Classic Castle Bounce House</h3>
+            <p>The #1 most-booked for birthday parties. Ages 3–12, fits 8 kids.</p>
+            <div class="hero-card-row">
+              <span class="price-tag">$129<span style="font-size:.8rem;font-weight:500;color:var(--muted);">/day</span></span>
+              <a href="#book" onclick="startBooking(0)" class="btn btn-primary btn-sm">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating badges -->
+        <div class="float-badge" style="top:-18px;right:-20px;animation-delay:.5s;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span style="color:#166534;">Safety Certified</span>
+        </div>
+        <div class="float-badge" style="bottom:-16px;left:-20px;animation-delay:1.2s;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f7941d" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span style="color:#92400e;">Free Delivery</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- HOUSES SECTION -->
-<section id="houses" style="padding:80px 24px;background:#fff;">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:52px;">
-      <div class="section-tag" style="background:var(--sky);color:var(--blue);">Our Fleet</div>
-      <h2 style="font-size:clamp(2rem,4vw,2.8rem);font-weight:800;margin-top:12px;margin-bottom:12px;">3 Awesome Bounce Houses</h2>
-      <p style="font-size:1.05rem;color:#4b5563;max-width:480px;margin:0 auto;">All sanitized, safety-inspected, and ready to make your party unforgettable.</p>
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      ASTM Safety Certified
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;">
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Secure Online Payment
+    </div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      500+ Happy Families
+    </div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Free Delivery (20mi)
+    </div>
+    <div class="trust-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Hospital-Grade Cleaning
+    </div>
+  </div>
+</div>
 
-      <!-- House 1 -->
-      <div class="clay" style="overflow:hidden;display:flex;flex-direction:column;">
-        <div style="background:linear-gradient(135deg,#dbeafe,#ede9fe);padding:32px;display:flex;justify-content:center;align-items:center;min-height:200px;">
-          <svg viewBox="0 0 260 200" style="width:200px;" aria-hidden="true">
-            <ellipse cx="130" cy="188" rx="110" ry="10" fill="var(--blue)" opacity=".08"/>
-            <rect x="20" y="80" width="220" height="102" rx="20" fill="var(--orange)" stroke="var(--blue)" stroke-width="3.5"/>
-            <path d="M20 100 Q130 32 240 100Z" fill="var(--blue)" stroke="var(--blue)" stroke-width="3.5"/>
-            <path d="M50 100 Q130 50 210 100Z" fill="var(--sky)" stroke="var(--blue)" stroke-width="2.5"/>
-            <rect x="95" y="130" width="70" height="52" rx="10" fill="var(--blue)"/>
-            <rect x="99" y="134" width="62" height="46" rx="8" fill="#0d2a5e"/>
-            <rect x="30" y="106" width="48" height="36" rx="8" fill="#bae6fd" stroke="var(--blue)" stroke-width="2.5"/>
-            <rect x="182" y="106" width="48" height="36" rx="8" fill="#bae6fd" stroke="var(--blue)" stroke-width="2.5"/>
-            <rect x="15" y="60" width="46" height="46" rx="10" fill="var(--pink)" stroke="var(--blue)" stroke-width="3"/>
-            <rect x="199" y="60" width="46" height="46" rx="10" fill="var(--pink)" stroke="var(--blue)" stroke-width="3"/>
-            <polygon points="15,60 38,26 61,60" fill="var(--yellow)" stroke="var(--blue)" stroke-width="2.5"/>
-            <polygon points="199,60 222,26 245,60" fill="var(--yellow)" stroke="var(--blue)" stroke-width="2.5"/>
+<!-- HOUSES -->
+<section class="section" id="houses" style="background:#fff;">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Available Rentals</div>
+      <h2 class="section-title">Choose Your Bounce House</h2>
+      <p class="section-sub">All units are fully insured, sanitized before every rental, and delivered right to your event.</p>
+    </div>
+    <div class="houses-grid">
+
+      <div class="house-card">
+        <div class="house-img" style="background:linear-gradient(135deg,#dbeafe,#e0e7ff);">
+          <div class="house-badge">Most Popular</div>
+          <svg viewBox="0 0 260 180" style="width:200px;" aria-hidden="true">
+            <ellipse cx="130" cy="168" rx="100" ry="9" fill="#1a3a6b" opacity=".08"/>
+            <rect x="20" y="75" width="220" height="90" rx="18" fill="#f7941d" stroke="#1a3a6b" stroke-width="3"/>
+            <path d="M20 94 Q130 30 240 94Z" fill="#1a3a6b"/>
+            <path d="M50 94 Q130 46 210 94Z" fill="#38bdf8" opacity=".8"/>
+            <rect x="90" y="117" width="80" height="48" rx="10" fill="#0f2549"/>
+            <rect x="28" y="96" width="52" height="36" rx="7" fill="#bae6fd" stroke="#1a3a6b" stroke-width="2"/>
+            <rect x="180" y="96" width="52" height="36" rx="7" fill="#bae6fd" stroke="#1a3a6b" stroke-width="2"/>
+            <rect x="16" y="52" width="50" height="48" rx="10" fill="#f06292" stroke="#1a3a6b" stroke-width="2.5"/>
+            <rect x="194" y="52" width="50" height="48" rx="10" fill="#f06292" stroke="#1a3a6b" stroke-width="2.5"/>
+            <polygon points="16,52 41,16 66,52" fill="#ffd600" stroke="#1a3a6b" stroke-width="2"/>
+            <polygon points="194,52 219,16 244,52" fill="#ffd600" stroke="#1a3a6b" stroke-width="2"/>
           </svg>
         </div>
-        <div style="padding:24px;flex:1;display:flex;flex-direction:column;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-            <h3 style="font-size:1.2rem;font-weight:800;">Classic Castle</h3>
-            <span style="font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:800;color:var(--orange);">$129<span style="font-size:.8rem;color:#6b7280;font-weight:600;">/day</span></span>
+        <div class="house-body">
+          <div class="house-name">Classic Castle</div>
+          <div class="house-desc">The all-time favorite. A full castle design with viewing windows, bounce lane, and two turrets. Works perfectly for any backyard party.</div>
+          <div class="house-meta">
+            <span class="tag">Ages 3–12</span>
+            <span class="tag">Up to 8 Kids</span>
+            <span class="tag">15 × 15 ft</span>
           </div>
-          <p style="font-size:.9rem;color:#4b5563;line-height:1.6;margin-bottom:14px;">The crowd-pleaser! A full castle design with side windows, slide, and two bounce lanes. Kids aged 3–12.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
-            <span style="background:#eff6ff;color:var(--blue);border:2px solid var(--blue);border-radius:50px;padding:2px 10px;font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:700;">Ages 3–12</span>
-            <span style="background:#fff7ed;color:#c2410c;border:2px solid var(--blue);border-radius:50px;padding:2px 10px;font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:700;">Up to 8 Kids</span>
-            <span style="background:#f0fdf4;color:#166534;border:2px solid var(--blue);border-radius:50px;padding:2px 10px;font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:700;">15×15 ft</span>
+          <div class="house-footer">
+            <div class="house-price">$129 <span>/day</span></div>
+            <a href="#book" onclick="startBooking(0)" class="btn btn-primary btn-md">Book Now</a>
           </div>
-          <a href="#book" onclick="startBooking(0)" class="btn btn-orange" style="padding:12px 20px;font-size:.92rem;justify-content:center;margin-top:auto;">Book This House →</a>
         </div>
       </div>
 
-      <!-- House 2 -->
-      <div class="clay" style="overflow:hidden;display:flex;flex-direction:column;">
-        <div style="background:linear-gradient(135deg,#cffafe,#dbeafe);padding:32px;display:flex;justify-content:center;align-items:center;min-height:200px;">
-          <svg viewBox="0 0 260 200" style="width:200px;" aria-hidden="true">
-            <ellipse cx="130" cy="188" rx="110" ry="10" fill="var(--blue)" opacity=".08"/>
-            <rect x="20" y="90" width="128" height="96" rx="18" fill="var(--sky)" stroke="var(--blue)" stroke-width="3.5"/>
-            <path d="M148 110 Q210 132 205 180 L148 180Z" fill="var(--yellow)" stroke="var(--blue)" stroke-width="3"/>
-            <ellipse cx="185" cy="178" rx="44" ry="14" fill="#bae6fd" stroke="var(--blue)" stroke-width="3"/>
-            <rect x="20" y="86" width="128" height="20" rx="8" fill="var(--pink)" stroke="var(--blue)" stroke-width="3"/>
-            <rect x="60" y="132" width="52" height="54" rx="10" fill="var(--blue)"/>
-            <rect x="64" y="136" width="44" height="48" rx="8" fill="#0d2a5e"/>
-            <circle cx="172" cy="96" r="7" fill="#38bdf8" stroke="var(--blue)" stroke-width="2"/>
-            <circle cx="188" cy="112" r="5" fill="#38bdf8" stroke="var(--blue)" stroke-width="2"/>
-            <circle cx="160" cy="112" r="6" fill="#38bdf8" stroke="var(--blue)" stroke-width="2"/>
-            <text x="15" y="75" font-size="22" fill="var(--yellow)">★</text>
-            <text x="215" y="88" font-size="18" fill="var(--sky)">★</text>
+      <div class="house-card">
+        <div class="house-img" style="background:linear-gradient(135deg,#cffafe,#dbeafe);">
+          <div class="house-badge" style="background:var(--sky);color:#0f2549;">Summer Hit</div>
+          <svg viewBox="0 0 260 180" style="width:200px;" aria-hidden="true">
+            <ellipse cx="130" cy="168" rx="100" ry="9" fill="#1a3a6b" opacity=".08"/>
+            <rect x="18" y="80" width="110" height="88" rx="16" fill="#38bdf8" stroke="#1a3a6b" stroke-width="3"/>
+            <path d="M128 98 Q195 120 190 168 L128 168Z" fill="#ffd600" stroke="#1a3a6b" stroke-width="2.5"/>
+            <ellipse cx="168" cy="166" rx="50" ry="13" fill="#bae6fd" stroke="#1a3a6b" stroke-width="2.5"/>
+            <rect x="18" y="76" width="110" height="18" rx="7" fill="#f06292" stroke="#1a3a6b" stroke-width="2.5"/>
+            <rect x="50" y="118" width="50" height="50" rx="9" fill="#0f2549"/>
+            <circle cx="158" cy="82" r="9" fill="#38bdf8" stroke="#1a3a6b" stroke-width="2"/>
+            <circle cx="175" cy="100" r="6" fill="#38bdf8" stroke="#1a3a6b" stroke-width="2"/>
+            <circle cx="147" cy="99" r="7" fill="#38bdf8" stroke="#1a3a6b" stroke-width="2"/>
           </svg>
         </div>
-        <div style="padding:24px;flex:1;display:flex;flex-direction:column;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-            <h3 style="font-size:1.2rem;font-weight:800;">Splash Zone Slide</h3>
-            <span style="font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:800;color:var(--orange);">$179<span style="font-size:.8rem;color:#6b7280;font-weight:600;">/day</span></span>
+        <div class="house-body">
+          <div class="house-name">Splash Zone Water Slide</div>
+          <div class="house-desc">Beat the heat with a full bounce area plus a soaking wet water slide and splash pool at the bottom. The ultimate summer party upgrade.</div>
+          <div class="house-meta">
+            <span class="tag">Ages 4–15</span>
+            <span class="tag">Water Slide</span>
+            <span class="tag">18 × 12 ft</span>
           </div>
-          <p style="font-size:.9rem;color:#4b5563;line-height:1.6;margin-bottom:14px;">Beat the heat! Full bounce area + a soaking wet water slide and splash pool. The ultimate summer setup.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
-            <span style="background:#eff6ff;color:var(--blue);border:2px solid var(--blue);border-radius:50px;padding:2px 10px;font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:700;">Ages 4–15</span>
-            <span style="background:#f0f9ff;color:#0369a1;border:2px solid var(--blue);border-radius:50px;padding:2px 10px;font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:700;">Water Slide</span>
-            <span style="background:#f0fdf4;color:#166534;border:2px solid var(--blue);border-radius:50px;padding:2px 10px;font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:700;">18×12 ft</span>
+          <div class="house-footer">
+            <div class="house-price">$179 <span>/day</span></div>
+            <a href="#book" onclick="startBooking(1)" class="btn btn-primary btn-md">Book Now</a>
           </div>
-          <a href="#book" onclick="startBooking(1)" class="btn btn-orange" style="padding:12px 20px;font-size:.92rem;justify-content:center;margin-top:auto;">Book This House →</a>
         </div>
       </div>
 
-      <!-- House 3 -->
-      <div class="clay" style="overflow:hidden;display:flex;flex-direction:column;">
-        <div style="background:linear-gradient(135deg,#fdf4ff,#fce7f3);padding:32px;display:flex;justify-content:center;align-items:center;min-height:200px;">
-          <svg viewBox="0 0 260 200" style="width:200px;" aria-hidden="true">
-            <ellipse cx="130" cy="188" rx="110" ry="10" fill="var(--blue)" opacity=".08"/>
-            <rect x="25" y="85" width="210" height="100" rx="20" fill="var(--pink)" stroke="var(--blue)" stroke-width="3.5"/>
-            <!-- Horn -->
-            <polygon points="130,85 118,38 142,38" fill="var(--yellow)" stroke="var(--blue)" stroke-width="3"/>
-            <!-- Mane stripes -->
-            <path d="M142 52 Q168 62 162 82" stroke="var(--sky)" stroke-width="6" fill="none" stroke-linecap="round"/>
-            <path d="M148 46 Q178 56 170 80" stroke="var(--orange)" stroke-width="4" fill="none" stroke-linecap="round"/>
-            <!-- Roof arc -->
-            <path d="M25 85 Q130 30 235 85Z" fill="#e879f9" stroke="var(--blue)" stroke-width="3.5"/>
-            <rect x="90" y="120" width="80" height="65" rx="12" fill="var(--blue)"/>
-            <rect x="94" y="124" width="72" height="59" rx="10" fill="#4a0072"/>
-            <text x="50" y="118" font-size="18" fill="var(--yellow)">★</text>
-            <text x="190" y="118" font-size="18" fill="var(--yellow)">★</text>
-            <circle cx="55" cy="128" r="10" fill="var(--yellow)" stroke="var(--blue)" stroke-width="2"/>
-            <circle cx="205" cy="128" r="10" fill="var(--sky)" stroke="var(--blue)" stroke-width="2"/>
+      <div class="house-card">
+        <div class="house-img" style="background:linear-gradient(135deg,#fdf4ff,#fce7f3);">
+          <div class="house-badge" style="background:#a855f7;">Girls Love It</div>
+          <svg viewBox="0 0 260 180" style="width:200px;" aria-hidden="true">
+            <ellipse cx="130" cy="168" rx="100" ry="9" fill="#1a3a6b" opacity=".08"/>
+            <rect x="22" y="82" width="216" height="84" rx="18" fill="#f06292" stroke="#1a3a6b" stroke-width="3"/>
+            <polygon points="130,82 116,40 144,40" fill="#ffd600" stroke="#1a3a6b" stroke-width="2.5"/>
+            <path d="M144 56 Q172 66 166 82" stroke="#38bdf8" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <path d="M150 50 Q184 60 176 80" stroke="#f7941d" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M22 82 Q130 30 238 82Z" fill="#d946ef" stroke="#1a3a6b" stroke-width="3"/>
+            <rect x="90" y="116" width="80" height="50" rx="11" fill="#0f2549"/>
+            <circle cx="56" cy="110" r="12" fill="#ffd600" stroke="#1a3a6b" stroke-width="2"/>
+            <circle cx="204" cy="110" r="12" fill="#38bdf8" stroke="#1a3a6b" stroke-width="2"/>
           </svg>
         </div>
-        <div style="padding:24px;flex:1;display:flex;flex-direction:column;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-            <h3 style="font-size:1.2rem;font-weight:800;">Unicorn Dream</h3>
-            <span style="font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:800;color:var(--orange);">$149<span style="font-size:.8rem;color:#6b7280;font-weight:600;">/day</span></span>
+        <div class="house-body">
+          <div class="house-name">Unicorn Dream Castle</div>
+          <div class="house-desc">A magical pink and purple unicorn castle with a glittery horn and rainbow mane. Perfect for princess parties and little dreamers.</div>
+          <div class="house-meta">
+            <span class="tag">Ages 2–10</span>
+            <span class="tag">Magical Theme</span>
+            <span class="tag">13 × 13 ft</span>
           </div>
-          <p style="font-size:.9rem;color:#4b5563;line-height:1.6;margin-bottom:14px;">Magical pink & purple unicorn castle. Every kid's dream! Stars, sparkles, and all the vibes. Ages 2–10.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
-            <span style="background:#eff6ff;color:var(--blue);border:2px solid var(--blue);border-radius:50px;padding:2px 10px;font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:700;">Ages 2–10</span>
-            <span style="background:#fdf4ff;color:#7e22ce;border:2px solid var(--blue);border-radius:50px;padding:2px 10px;font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:700;">Magical!</span>
-            <span style="background:#f0fdf4;color:#166534;border:2px solid var(--blue);border-radius:50px;padding:2px 10px;font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:700;">13×13 ft</span>
+          <div class="house-footer">
+            <div class="house-price">$149 <span>/day</span></div>
+            <a href="#book" onclick="startBooking(2)" class="btn btn-primary btn-md">Book Now</a>
           </div>
-          <a href="#book" onclick="startBooking(2)" class="btn btn-orange" style="padding:12px 20px;font-size:.92rem;justify-content:center;margin-top:auto;">Book This House →</a>
         </div>
       </div>
 
@@ -325,686 +743,665 @@
   </div>
 </section>
 
-<!-- ========== BOOKING WIZARD ========== -->
-<section id="book" style="padding:80px 24px;background:linear-gradient(160deg,#e8f4ff 0%,#fff9f0 100%);">
-  <div style="max-width:860px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:16px;">
-      <div class="section-tag" style="background:var(--orange);color:#fff;">Let's Party!</div>
-      <h2 style="font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;margin-top:12px;margin-bottom:8px;">Book Your Bounce House</h2>
-      <p style="font-size:1rem;color:#4b5563;">4 easy steps — takes less than 2 minutes!</p>
+<!-- HOW IT WORKS -->
+<section class="section hiw-section" id="how-it-works">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow" style="color:#38bdf8;">Simple Process</div>
+      <h2 class="section-title" style="color:#fff;">From Booking to Bouncing</h2>
+      <p class="section-sub" style="color:#64748b;">We handle all the heavy lifting so you can focus on the party.</p>
     </div>
-
-    <!-- Step bar -->
-    <div class="step-bar">
-      <div class="step-dot active" id="sdot-1">1</div>
-      <div class="step-line" id="sline-1"></div>
-      <div class="step-dot" id="sdot-2">2</div>
-      <div class="step-line" id="sline-2"></div>
-      <div class="step-dot" id="sdot-3">3</div>
-      <div class="step-line" id="sline-3"></div>
-      <div class="step-dot" id="sdot-4">4</div>
-    </div>
-    <div style="display:flex;justify-content:center;gap:0;margin-top:6px;margin-bottom:32px;">
-      <span style="width:42px;text-align:center;font-size:.72rem;font-weight:700;color:#6b7280;">House</span>
-      <span style="width:48px;"></span>
-      <span style="width:42px;text-align:center;font-size:.72rem;font-weight:700;color:#6b7280;">Banner</span>
-      <span style="width:48px;"></span>
-      <span style="width:42px;text-align:center;font-size:.72rem;font-weight:700;color:#6b7280;">Date</span>
-      <span style="width:48px;"></span>
-      <span style="width:42px;text-align:center;font-size:.72rem;font-weight:700;color:#6b7280;">Pay</span>
-    </div>
-
-    <!-- STEP 1: Choose House -->
-    <div id="step-1" class="clay" style="padding:32px;">
-      <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:6px;">Step 1 — Pick Your Bounce House</h3>
-      <p style="font-size:.93rem;color:#4b5563;margin-bottom:24px;">Select the inflatable you want for your party.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;" id="house-select-grid">
-
-        <div class="house-card" data-house="0" onclick="selectHouse(0)">
-          <div class="check-badge" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div style="background:linear-gradient(135deg,#dbeafe,#ede9fe);padding:24px;display:flex;justify-content:center;">
-            <svg viewBox="0 0 160 120" style="width:120px;" aria-hidden="true">
-              <rect x="10" y="48" width="140" height="68" rx="14" fill="var(--orange)" stroke="var(--blue)" stroke-width="3"/>
-              <path d="M10 62 Q80 18 150 62Z" fill="var(--blue)" stroke="var(--blue)" stroke-width="3"/>
-              <rect x="56" y="80" width="48" height="36" rx="8" fill="var(--blue)"/>
-              <rect x="15" y="63" width="36" height="28" rx="6" fill="#bae6fd" stroke="var(--blue)" stroke-width="2"/>
-              <rect x="109" y="63" width="36" height="28" rx="6" fill="#bae6fd" stroke="var(--blue)" stroke-width="2"/>
-            </svg>
-          </div>
-          <div style="padding:16px;">
-            <div style="font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;margin-bottom:2px;">Classic Castle</div>
-            <div style="font-family:'Baloo 2',cursive;font-size:.9rem;color:var(--orange);font-weight:700;">$129/day</div>
-            <div style="font-size:.8rem;color:#6b7280;margin-top:4px;">Ages 3–12 · 15×15 ft</div>
-          </div>
-        </div>
-
-        <div class="house-card" data-house="1" onclick="selectHouse(1)">
-          <div class="check-badge" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div style="background:linear-gradient(135deg,#cffafe,#dbeafe);padding:24px;display:flex;justify-content:center;">
-            <svg viewBox="0 0 160 120" style="width:120px;" aria-hidden="true">
-              <rect x="10" y="50" width="88" height="66" rx="14" fill="var(--sky)" stroke="var(--blue)" stroke-width="3"/>
-              <path d="M98 64 Q140 80 136 112 L98 112Z" fill="var(--yellow)" stroke="var(--blue)" stroke-width="2.5"/>
-              <ellipse cx="118" cy="111" rx="32" ry="10" fill="#bae6fd" stroke="var(--blue)" stroke-width="2.5"/>
-              <rect x="36" y="82" width="38" height="34" rx="8" fill="var(--blue)"/>
-            </svg>
-          </div>
-          <div style="padding:16px;">
-            <div style="font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;margin-bottom:2px;">Splash Zone</div>
-            <div style="font-family:'Baloo 2',cursive;font-size:.9rem;color:var(--orange);font-weight:700;">$179/day</div>
-            <div style="font-size:.8rem;color:#6b7280;margin-top:4px;">Ages 4–15 · 18×12 ft</div>
-          </div>
-        </div>
-
-        <div class="house-card" data-house="2" onclick="selectHouse(2)">
-          <div class="check-badge" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div style="background:linear-gradient(135deg,#fdf4ff,#fce7f3);padding:24px;display:flex;justify-content:center;">
-            <svg viewBox="0 0 160 120" style="width:120px;" aria-hidden="true">
-              <rect x="14" y="52" width="132" height="64" rx="14" fill="var(--pink)" stroke="var(--blue)" stroke-width="3"/>
-              <polygon points="80,52 72,22 88,22" fill="var(--yellow)" stroke="var(--blue)" stroke-width="2.5"/>
-              <path d="M14 52 Q80 18 146 52Z" fill="#e879f9" stroke="var(--blue)" stroke-width="3"/>
-              <rect x="56" y="80" width="48" height="36" rx="8" fill="var(--blue)"/>
-              <text x="25" y="78" font-size="14" fill="var(--yellow)">★</text>
-              <text x="118" y="78" font-size="14" fill="var(--yellow)">★</text>
-            </svg>
-          </div>
-          <div style="padding:16px;">
-            <div style="font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;margin-bottom:2px;">Unicorn Dream</div>
-            <div style="font-family:'Baloo 2',cursive;font-size:.9rem;color:var(--orange);font-weight:700;">$149/day</div>
-            <div style="font-size:.8rem;color:#6b7280;margin-top:4px;">Ages 2–10 · 13×13 ft</div>
-          </div>
-        </div>
-
+    <div class="hiw-grid">
+      <div class="hiw-item">
+        <div class="hiw-num">1</div>
+        <h4>Choose Your Setup</h4>
+        <p>Pick your bounce house, custom banner, and party date — all online in under 2 minutes.</p>
       </div>
-      <div style="margin-top:24px;display:flex;justify-content:flex-end;">
-        <button onclick="goStep(2)" class="btn btn-orange" style="padding:14px 32px;font-size:1rem;" id="step1-next" disabled>
-          Next: Choose Banner →
-        </button>
+      <div class="hiw-item">
+        <div class="hiw-num">2</div>
+        <h4>Pay Your Deposit</h4>
+        <p>Secure your date with just a 25% deposit. Balance is due on delivery day.</p>
+      </div>
+      <div class="hiw-item">
+        <div class="hiw-num">3</div>
+        <h4>We Deliver &amp; Set Up</h4>
+        <p>Our crew arrives 60 minutes early, sets everything up, and stakes it down safely.</p>
+      </div>
+      <div class="hiw-item">
+        <div class="hiw-num">4</div>
+        <h4>We Pick It Up</h4>
+        <p>When the party's over, we return, take it all down, and haul it away. Zero stress.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- STEP 2: Choose Banner -->
-    <div id="step-2" style="display:none;">
-      <div class="clay" style="padding:32px;">
-        <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:6px;">Step 2 — Pick Your Banner</h3>
-        <p style="font-size:.93rem;color:#4b5563;margin-bottom:24px;">We'll put your custom banner right on the front of the bounce house!</p>
-
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:20px;" id="banner-grid">
-          <div class="banner-opt" data-banner="Happy Birthday!" onclick="selectBanner(this,'Happy Birthday!')">
-            <div style="width:44px;height:44px;border-radius:10px;background:#fff9c4;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem;">🎂</div>
-            <div>
-              <div style="font-family:'Baloo 2',cursive;font-weight:700;font-size:.98rem;">Happy Birthday!</div>
-              <div style="font-size:.8rem;color:#6b7280;">Classic birthday message</div>
-            </div>
-          </div>
-          <div class="banner-opt" data-banner="Congratulations!" onclick="selectBanner(this,'Congratulations!')">
-            <div style="width:44px;height:44px;border-radius:10px;background:#dcfce7;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem;">🎓</div>
-            <div>
-              <div style="font-family:'Baloo 2',cursive;font-weight:700;font-size:.98rem;">Congratulations!</div>
-              <div style="font-size:.8rem;color:#6b7280;">Grad parties, achievements</div>
-            </div>
-          </div>
-          <div class="banner-opt" data-banner="Let's Celebrate!" onclick="selectBanner(this,'Let\'s Celebrate!')">
-            <div style="width:44px;height:44px;border-radius:10px;background:#ffe4e6;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem;">🎉</div>
-            <div>
-              <div style="font-family:'Baloo 2',cursive;font-weight:700;font-size:.98rem;">Let's Celebrate!</div>
-              <div style="font-size:.8rem;color:#6b7280;">Any occasion</div>
-            </div>
-          </div>
-          <div class="banner-opt" data-banner="Welcome Home!" onclick="selectBanner(this,'Welcome Home!')">
-            <div style="width:44px;height:44px;border-radius:10px;background:#dbeafe;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem;">🏠</div>
-            <div>
-              <div style="font-family:'Baloo 2',cursive;font-weight:700;font-size:.98rem;">Welcome Home!</div>
-              <div style="font-size:.8rem;color:#6b7280;">Homecoming parties</div>
-            </div>
-          </div>
-          <div class="banner-opt" data-banner="Custom" onclick="selectBanner(this,'Custom');document.getElementById('custom-banner-wrap').style.display='block'">
-            <div style="width:44px;height:44px;border-radius:10px;background:#f5f3ff;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem;">✏️</div>
-            <div>
-              <div style="font-family:'Baloo 2',cursive;font-weight:700;font-size:.98rem;">Custom Message</div>
-              <div style="font-size:.8rem;color:#6b7280;">Type your own banner text</div>
-            </div>
-          </div>
-          <div class="banner-opt" data-banner="No Banner" onclick="selectBanner(this,'No Banner');document.getElementById('custom-banner-wrap').style.display='none'">
-            <div style="width:44px;height:44px;border-radius:10px;background:#f9fafb;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.4rem;">🚫</div>
-            <div>
-              <div style="font-family:'Baloo 2',cursive;font-weight:700;font-size:.98rem;">No Banner</div>
-              <div style="font-size:.8rem;color:#6b7280;">Keep it plain, that's cool!</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Custom banner input -->
-        <div id="custom-banner-wrap" style="display:none;margin-bottom:20px;">
-          <label class="form-label" for="custom-banner-text">Your Custom Banner Message</label>
-          <input class="form-input" type="text" id="custom-banner-text" maxlength="40" placeholder="e.g. Happy 5th Birthday Emma! 🎈" oninput="updateCustomBanner(this.value)"/>
-          <div style="font-size:.8rem;color:#6b7280;margin-top:4px;">Max 40 characters</div>
-        </div>
-
-        <!-- Live preview -->
-        <div id="banner-preview" style="display:none;background:linear-gradient(135deg,#e8f4ff,#fff9f0);border:2.5px solid var(--blue);border-radius:14px;padding:20px;text-align:center;margin-bottom:20px;">
-          <div style="font-size:.8rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Banner Preview</div>
-          <div style="background:var(--yellow);border:2.5px solid var(--blue);border-radius:8px;padding:10px 24px;display:inline-block;">
-            <span id="preview-text" style="font-family:'Baloo 2',cursive;font-weight:800;font-size:1.15rem;color:var(--blue);"></span>
-          </div>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;margin-top:16px;">
-          <button onclick="goStep(1)" class="btn btn-white" style="padding:12px 24px;font-size:.95rem;">← Back</button>
-          <button onclick="goStep(3)" class="btn btn-orange" style="padding:14px 32px;font-size:1rem;" id="step2-next" disabled>Next: Pick a Date →</button>
-        </div>
-      </div>
+<!-- BOOKING WIZARD -->
+<section class="section book-section" id="book">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Online Booking</div>
+      <h2 class="section-title">Reserve Your Bounce House</h2>
+      <p class="section-sub">Pick your house, banner, and date — then pay securely to lock it in.</p>
     </div>
 
-    <!-- STEP 3: Choose Date -->
-    <div id="step-3" style="display:none;">
-      <div class="clay" style="padding:32px;">
-        <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:6px;">Step 3 — Pick Your Party Date</h3>
-        <p style="font-size:.93rem;color:#4b5563;margin-bottom:24px;">Select an available date. Dates in red are already booked.</p>
+    <div class="wizard-wrap">
+      <!-- Header -->
+      <div class="wizard-header">
+        <h3 id="wiz-title">Step 1 — Choose Your Bounce House</h3>
+        <p id="wiz-sub">Select the inflatable that's right for your party.</p>
+      </div>
 
-        <!-- Calendar -->
-        <div style="max-width:460px;margin:0 auto;">
-          <!-- Month nav -->
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-            <button onclick="changeMonth(-1)" class="btn btn-white" style="padding:8px 16px;font-size:.9rem;" id="prev-month-btn">← Prev</button>
-            <div style="font-family:'Baloo 2',cursive;font-weight:800;font-size:1.2rem;" id="cal-month-label"></div>
-            <button onclick="changeMonth(1)" class="btn btn-white" style="padding:8px 16px;font-size:.9rem;">Next →</button>
+      <!-- Progress -->
+      <div class="progress-bar">
+        <div class="prog-step">
+          <div class="prog-dot active" id="pd1">1</div>
+          <div class="prog-label"><span>Step 1</span><span>House</span></div>
+        </div>
+        <div class="prog-line" id="pl1"></div>
+        <div class="prog-step">
+          <div class="prog-dot" id="pd2">2</div>
+          <div class="prog-label"><span>Step 2</span><span>Banner</span></div>
+        </div>
+        <div class="prog-line" id="pl2"></div>
+        <div class="prog-step">
+          <div class="prog-dot" id="pd3">3</div>
+          <div class="prog-label"><span>Step 3</span><span>Date</span></div>
+        </div>
+        <div class="prog-line" id="pl3"></div>
+        <div class="prog-step">
+          <div class="prog-dot" id="pd4">4</div>
+          <div class="prog-label"><span>Step 4</span><span>Pay</span></div>
+        </div>
+      </div>
+
+      <!-- Step 1: House -->
+      <div class="wizard-body" id="step1">
+        <div class="wiz-houses">
+          <div class="wiz-house" data-h="0" onclick="pickHouse(0)">
+            <div class="sel-check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="wiz-house-img" style="background:linear-gradient(135deg,#dbeafe,#e0e7ff);">
+              <svg viewBox="0 0 160 110" style="width:120px;" aria-hidden="true">
+                <rect x="10" y="42" width="140" height="65" rx="12" fill="#f7941d" stroke="#1a3a6b" stroke-width="2.5"/>
+                <path d="M10 56 Q80 16 150 56Z" fill="#1a3a6b"/>
+                <rect x="56" y="76" width="48" height="31" rx="7" fill="#0f2549"/>
+                <rect x="16" y="57" width="36" height="26" rx="6" fill="#bae6fd" stroke="#1a3a6b" stroke-width="2"/>
+                <rect x="108" y="57" width="36" height="26" rx="6" fill="#bae6fd" stroke="#1a3a6b" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="wiz-house-info">
+              <h4>Classic Castle</h4>
+              <p>Ages 3–12 · 15×15 ft · Up to 8 kids</p>
+              <div class="wiz-price">$129/day</div>
+            </div>
           </div>
-          <!-- Day labels -->
-          <div class="cal-grid" style="margin-bottom:8px;">
-            <div style="text-align:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:.82rem;color:#6b7280;">Sun</div>
-            <div style="text-align:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:.82rem;color:#6b7280;">Mon</div>
-            <div style="text-align:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:.82rem;color:#6b7280;">Tue</div>
-            <div style="text-align:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:.82rem;color:#6b7280;">Wed</div>
-            <div style="text-align:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:.82rem;color:#6b7280;">Thu</div>
-            <div style="text-align:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:.82rem;color:#6b7280;">Fri</div>
-            <div style="text-align:center;font-family:'Baloo 2',cursive;font-weight:700;font-size:.82rem;color:#6b7280;">Sat</div>
+
+          <div class="wiz-house" data-h="1" onclick="pickHouse(1)">
+            <div class="sel-check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="wiz-house-img" style="background:linear-gradient(135deg,#cffafe,#dbeafe);">
+              <svg viewBox="0 0 160 110" style="width:120px;" aria-hidden="true">
+                <rect x="10" y="46" width="80" height="62" rx="12" fill="#38bdf8" stroke="#1a3a6b" stroke-width="2.5"/>
+                <path d="M90 56 Q134 72 130 108 L90 108Z" fill="#ffd600" stroke="#1a3a6b" stroke-width="2"/>
+                <ellipse cx="112" cy="107" rx="34" ry="10" fill="#bae6fd" stroke="#1a3a6b" stroke-width="2"/>
+                <rect x="30" y="78" width="38" height="30" rx="7" fill="#0f2549"/>
+              </svg>
+            </div>
+            <div class="wiz-house-info">
+              <h4>Splash Zone Slide</h4>
+              <p>Ages 4–15 · 18×12 ft · Water slide</p>
+              <div class="wiz-price">$179/day</div>
+            </div>
+          </div>
+
+          <div class="wiz-house" data-h="2" onclick="pickHouse(2)">
+            <div class="sel-check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="wiz-house-img" style="background:linear-gradient(135deg,#fdf4ff,#fce7f3);">
+              <svg viewBox="0 0 160 110" style="width:120px;" aria-hidden="true">
+                <rect x="14" y="48" width="132" height="60" rx="12" fill="#f06292" stroke="#1a3a6b" stroke-width="2.5"/>
+                <polygon points="80,48 72,22 88,22" fill="#ffd600" stroke="#1a3a6b" stroke-width="2"/>
+                <path d="M14 48 Q80 16 146 48Z" fill="#d946ef" stroke="#1a3a6b" stroke-width="2.5"/>
+                <rect x="56" y="76" width="48" height="32" rx="8" fill="#0f2549"/>
+              </svg>
+            </div>
+            <div class="wiz-house-info">
+              <h4>Unicorn Dream</h4>
+              <p>Ages 2–10 · 13×13 ft · Magical theme</p>
+              <div class="wiz-price">$149/day</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wizard-footer" id="step1-footer">
+        <span></span>
+        <button class="btn btn-primary btn-md" onclick="goStep(2)" id="btn-s1" disabled>Continue to Banner →</button>
+      </div>
+
+      <!-- Step 2: Banner -->
+      <div class="wizard-body" id="step2" style="display:none;">
+        <div class="banner-opts">
+          <div class="banner-opt" onclick="pickBanner(this,'Happy Birthday!')">
+            <div class="banner-icon" style="background:#fef9c3;">🎂</div>
+            <div><h5>Happy Birthday!</h5><p>Classic birthday message</p></div>
+          </div>
+          <div class="banner-opt" onclick="pickBanner(this,'Congratulations!')">
+            <div class="banner-icon" style="background:#dcfce7;">🎓</div>
+            <div><h5>Congratulations!</h5><p>Grad parties &amp; milestones</p></div>
+          </div>
+          <div class="banner-opt" onclick="pickBanner(this,'Let\'s Celebrate!')">
+            <div class="banner-icon" style="background:#ffe4e6;">🎉</div>
+            <div><h5>Let's Celebrate!</h5><p>Any occasion</p></div>
+          </div>
+          <div class="banner-opt" onclick="pickBanner(this,'Welcome Home!')">
+            <div class="banner-icon" style="background:#dbeafe;">🏠</div>
+            <div><h5>Welcome Home!</h5><p>Homecoming &amp; reunions</p></div>
+          </div>
+          <div class="banner-opt" data-custom onclick="pickBanner(this,'Custom');document.getElementById('custom-wrap').style.display='block'">
+            <div class="banner-icon" style="background:#f5f3ff;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <div><h5>Custom Message</h5><p>Type your own text (40 char max)</p></div>
+          </div>
+          <div class="banner-opt" onclick="pickBanner(this,'No Banner');document.getElementById('custom-wrap').style.display='none'">
+            <div class="banner-icon" style="background:#f1f5f9;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div><h5>No Banner</h5><p>Plain house, no text</p></div>
+          </div>
+        </div>
+
+        <div id="custom-wrap" style="display:none;margin-top:16px;">
+          <label class="input-label" for="custom-text">Your custom banner text</label>
+          <input class="input-field" type="text" id="custom-text" maxlength="40" placeholder="e.g. Happy 5th Birthday Emma!" oninput="onCustomText(this.value)"/>
+          <div style="font-size:.75rem;color:var(--muted);margin-top:4px;" id="char-count">0 / 40 characters</div>
+        </div>
+
+        <div id="banner-preview" style="display:none;" class="banner-preview-box">
+          <div class="label">Banner Preview</div>
+          <div class="banner-preview-inner"><span id="preview-text"></span></div>
+        </div>
+      </div>
+      <div class="wizard-footer" id="step2-footer" style="display:none;">
+        <button class="btn btn-ghost btn-md" onclick="goStep(1)">← Back</button>
+        <button class="btn btn-primary btn-md" onclick="goStep(3)" id="btn-s2" disabled>Continue to Date →</button>
+      </div>
+
+      <!-- Step 3: Date -->
+      <div class="wizard-body" id="step3" style="display:none;">
+        <div style="max-width:440px;margin:0 auto;">
+          <div class="cal-header">
+            <button class="cal-nav" id="cal-prev" onclick="changeMonth(-1)" aria-label="Previous month">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="cal-month" id="cal-label"></div>
+            <button class="cal-nav" onclick="changeMonth(1)" aria-label="Next month">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+          <div class="cal-grid" id="cal-days-header">
+            <div class="cal-weekday">Sun</div><div class="cal-weekday">Mon</div>
+            <div class="cal-weekday">Tue</div><div class="cal-weekday">Wed</div>
+            <div class="cal-weekday">Thu</div><div class="cal-weekday">Fri</div>
+            <div class="cal-weekday">Sat</div>
           </div>
           <div class="cal-grid" id="cal-days"></div>
-          <!-- Legend -->
-          <div style="display:flex;gap:20px;justify-content:center;margin-top:14px;flex-wrap:wrap;">
-            <div style="display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;"><div style="width:14px;height:14px;border-radius:4px;background:#fff;border:2px solid var(--blue);"></div>Available</div>
-            <div style="display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;"><div style="width:14px;height:14px;border-radius:4px;background:var(--orange);border:2px solid var(--blue);"></div>Selected</div>
-            <div style="display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;"><div style="width:14px;height:14px;border-radius:4px;background:#fee2e2;border:2px solid #fca5a5;"></div>Booked</div>
+          <div class="cal-legend">
+            <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#f1f5f9;border:1.5px solid #cbd5e1;"></div>Available</div>
+            <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--orange);"></div>Selected</div>
+            <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#fee2e2;"></div>Booked</div>
           </div>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;margin-top:28px;">
-          <button onclick="goStep(2)" class="btn btn-white" style="padding:12px 24px;font-size:.95rem;">← Back</button>
-          <button onclick="goStep(4)" class="btn btn-orange" style="padding:14px 32px;font-size:1rem;" id="step3-next" disabled>Next: Review & Pay →</button>
         </div>
       </div>
-    </div>
+      <div class="wizard-footer" id="step3-footer" style="display:none;">
+        <button class="btn btn-ghost btn-md" onclick="goStep(2)">← Back</button>
+        <button class="btn btn-primary btn-md" onclick="goStep(4)" id="btn-s3" disabled>Continue to Payment →</button>
+      </div>
 
-    <!-- STEP 4: Pay -->
-    <div id="step-4" style="display:none;">
-      <div class="clay" style="padding:32px;">
-        <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:6px;">Step 4 — Review & Pay</h3>
-        <p style="font-size:.93rem;color:#4b5563;margin-bottom:24px;">Confirm your booking details and complete payment.</p>
-
-        <!-- Order summary -->
-        <div style="background:linear-gradient(135deg,#e8f4ff,#fff9f0);border:3px solid var(--blue);border-radius:16px;padding:20px;margin-bottom:24px;">
-          <h4 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;margin-bottom:14px;color:var(--blue);">Order Summary</h4>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-weight:600;font-size:.93rem;">Bounce House</span>
-              <span style="font-family:'Baloo 2',cursive;font-weight:700;" id="summary-house">—</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-weight:600;font-size:.93rem;">Banner</span>
-              <span style="font-family:'Baloo 2',cursive;font-weight:700;" id="summary-banner">—</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-weight:600;font-size:.93rem;">Party Date</span>
-              <span style="font-family:'Baloo 2',cursive;font-weight:700;" id="summary-date">—</span>
-            </div>
-            <div style="border-top:2px dashed #93c5fd;padding-top:10px;margin-top:4px;display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-family:'Baloo 2',cursive;font-weight:700;">Rental Total</span>
-              <span style="font-family:'Baloo 2',cursive;font-weight:800;font-size:1.4rem;color:var(--orange);" id="summary-total">—</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <span style="font-size:.85rem;color:#6b7280;">Deposit due today (25%)</span>
-              <span style="font-family:'Baloo 2',cursive;font-weight:700;color:#059669;" id="summary-deposit">—</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Contact + Card form -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;" id="pay-form-grid">
+      <!-- Step 4: Pay -->
+      <div class="wizard-body" id="step4" style="display:none;">
+        <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:32px;" id="pay-grid">
+          <!-- Left: Contact -->
           <div>
-            <h4 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;margin-bottom:14px;">Your Details</h4>
-            <div style="display:flex;flex-direction:column;gap:12px;">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                <div>
-                  <label class="form-label" for="pay-fname">First Name</label>
-                  <input class="form-input" type="text" id="pay-fname" placeholder="Sarah" required/>
-                </div>
-                <div>
-                  <label class="form-label" for="pay-lname">Last Name</label>
-                  <input class="form-input" type="text" id="pay-lname" placeholder="Johnson" required/>
-                </div>
+            <div style="font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:14px;">Your Details</div>
+            <div class="input-row">
+              <div class="input-wrap">
+                <label class="input-label" for="pf-fname">First Name</label>
+                <input class="input-field" type="text" id="pf-fname" placeholder="Sarah" required/>
               </div>
-              <div>
-                <label class="form-label" for="pay-email">Email</label>
-                <input class="form-input" type="email" id="pay-email" placeholder="sarah@email.com" required/>
-              </div>
-              <div>
-                <label class="form-label" for="pay-phone">Phone</label>
-                <input class="form-input" type="tel" id="pay-phone" placeholder="(555) 000-0000" required/>
-              </div>
-              <div>
-                <label class="form-label" for="pay-address">Party Address</label>
-                <input class="form-input" type="text" id="pay-address" placeholder="123 Main St, Your City" required/>
+              <div class="input-wrap">
+                <label class="input-label" for="pf-lname">Last Name</label>
+                <input class="input-field" type="text" id="pf-lname" placeholder="Johnson" required/>
               </div>
             </div>
+            <div class="input-wrap">
+              <label class="input-label" for="pf-email">Email Address</label>
+              <input class="input-field" type="email" id="pf-email" placeholder="sarah@email.com" required/>
+            </div>
+            <div class="input-wrap">
+              <label class="input-label" for="pf-phone">Phone Number</label>
+              <input class="input-field" type="tel" id="pf-phone" placeholder="(555) 000-0000" required/>
+            </div>
+            <div class="input-wrap">
+              <label class="input-label" for="pf-addr">Party Address</label>
+              <input class="input-field" type="text" id="pf-addr" placeholder="123 Oak St, Your City, TX" required/>
+            </div>
           </div>
+
+          <!-- Right: Order + Payment -->
           <div>
-            <h4 style="font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;margin-bottom:14px;">Payment</h4>
-            <div style="display:flex;flex-direction:column;gap:12px;">
-              <div>
-                <label class="form-label" for="pay-name">Name on Card</label>
-                <input class="form-input" type="text" id="pay-name" placeholder="Sarah Johnson" required/>
+            <div class="order-summary">
+              <h4>Order Summary</h4>
+              <div class="order-row"><span class="key">House</span><span class="val" id="os-house">—</span></div>
+              <div class="order-row"><span class="key">Banner</span><span class="val" id="os-banner">—</span></div>
+              <div class="order-row"><span class="key">Date</span><span class="val" id="os-date">—</span></div>
+              <div class="order-row order-total"><span class="key">Total</span><span class="val" id="os-total">—</span></div>
+              <div class="order-row order-deposit"><span class="key">Deposit Due Today (25%)</span><span class="val" id="os-deposit">—</span></div>
+            </div>
+
+            <div style="font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:14px;">Payment</div>
+            <div class="input-wrap">
+              <label class="input-label" for="pf-cname">Name on Card</label>
+              <input class="input-field" type="text" id="pf-cname" placeholder="Sarah Johnson" required/>
+            </div>
+            <div class="input-wrap">
+              <label class="input-label" for="pf-cnum">Card Number</label>
+              <input class="input-field" type="text" id="pf-cnum" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)" required/>
+            </div>
+            <div class="input-row">
+              <div class="input-wrap">
+                <label class="input-label" for="pf-exp">Expiry</label>
+                <input class="input-field" type="text" id="pf-exp" placeholder="MM/YY" maxlength="5" oninput="fmtExp(this)" required/>
               </div>
-              <div class="card-field">
-                <label class="form-label" for="pay-card">Card Number</label>
-                <input class="form-input" type="text" id="pay-card" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" required/>
-                <svg width="22" height="16" viewBox="0 0 38 24" style="right:14px;" aria-hidden="true"><rect width="38" height="24" rx="4" fill="#1a3a6b"/><rect x="0" y="7" width="38" height="6" fill="#f7941d"/><rect x="4" y="14" width="14" height="6" rx="1" fill="#fff" opacity=".8"/></svg>
+              <div class="input-wrap">
+                <label class="input-label" for="pf-cvv">CVV</label>
+                <input class="input-field" type="text" id="pf-cvv" placeholder="123" maxlength="4" oninput="this.value=this.value.replace(/\D/g,'')" required/>
               </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                <div>
-                  <label class="form-label" for="pay-exp">Expiry</label>
-                  <input class="form-input" type="text" id="pay-exp" placeholder="MM/YY" maxlength="5" oninput="formatExp(this)" required/>
-                </div>
-                <div>
-                  <label class="form-label" for="pay-cvv">CVV</label>
-                  <input class="form-input" type="text" id="pay-cvv" placeholder="123" maxlength="4" oninput="this.value=this.value.replace(/\D/g,'')" required/>
-                </div>
-              </div>
-              <div style="background:#f0fdf4;border:2px solid #86efac;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:#166534;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                256-bit SSL encryption · Your payment is secure
-              </div>
+            </div>
+            <div class="security-row">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              256-bit SSL encryption · Your payment is secure
             </div>
           </div>
         </div>
 
-        <div style="background:#fff9f0;border:2px solid #fed7aa;border-radius:12px;padding:14px 16px;margin-top:20px;font-size:.88rem;color:#92400e;line-height:1.6;">
-          <strong>Booking Policy:</strong> 25% deposit secures your date. Remaining balance due on delivery day. Free weather reschedule. Cancellations 72h+ before event get full refund.
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:24px;flex-wrap:wrap;gap:12px;">
-          <button onclick="goStep(3)" class="btn btn-white" style="padding:12px 24px;font-size:.95rem;">← Back</button>
-          <button onclick="submitBooking()" class="btn btn-orange" style="padding:16px 40px;font-size:1.05rem;" id="pay-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-            Pay Deposit &amp; Book Now!
-          </button>
+        <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 16px;font-size:.83rem;color:#92400e;line-height:1.6;margin-top:8px;">
+          <strong>Policy:</strong> 25% deposit secures your date. Balance due on delivery. Free weather reschedule. Full refund for cancellations 72+ hours before event.
         </div>
       </div>
-    </div>
+      <div class="wizard-footer" id="step4-footer" style="display:none;">
+        <button class="btn btn-ghost btn-md" onclick="goStep(3)">← Back</button>
+        <button class="btn btn-primary btn-lg" onclick="submitPay()" id="pay-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Pay Deposit &amp; Confirm Booking
+        </button>
+      </div>
 
-    <!-- SUCCESS -->
-    <div id="step-success" style="display:none;">
-      <div class="clay" style="padding:48px 32px;text-align:center;">
-        <div class="bounce-anim" style="font-size:5rem;margin-bottom:16px;">🎉</div>
-        <h3 style="font-size:2rem;font-weight:800;color:var(--blue);margin-bottom:10px;">You're All Booked!</h3>
-        <p style="font-size:1.05rem;color:#374151;margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7;">
-          Awesome news — your party is officially on the books! We'll send a confirmation to your email within 30 minutes. Get ready for some Pure Play fun!
-        </p>
-        <div style="background:linear-gradient(135deg,#e8f4ff,#fff9f0);border:3px solid var(--blue);border-radius:16px;padding:20px;max-width:360px;margin:0 auto 28px;">
-          <div style="font-family:'Baloo 2',cursive;font-weight:800;font-size:.85rem;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Booking Confirmation</div>
-          <div style="display:flex;flex-direction:column;gap:6px;text-align:left;">
-            <div style="display:flex;justify-content:space-between;font-size:.92rem;font-weight:600;"><span style="color:#6b7280;">House</span><span id="conf-house"></span></div>
-            <div style="display:flex;justify-content:space-between;font-size:.92rem;font-weight:600;"><span style="color:#6b7280;">Banner</span><span id="conf-banner"></span></div>
-            <div style="display:flex;justify-content:space-between;font-size:.92rem;font-weight:600;"><span style="color:#6b7280;">Date</span><span id="conf-date"></span></div>
-            <div style="display:flex;justify-content:space-between;font-size:.92rem;font-weight:700;border-top:2px dashed #93c5fd;padding-top:6px;margin-top:4px;"><span>Deposit Paid</span><span style="color:var(--orange);" id="conf-deposit"></span></div>
-          </div>
+      <!-- Success -->
+      <div class="success-screen" id="step-success" style="display:none;">
+        <div class="success-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>You're All Booked!</h3>
+        <p>We'll send a confirmation to your email shortly. Our team will reach out to confirm the details before your event day.</p>
+        <div class="conf-card">
+          <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:12px;">Booking Confirmation</div>
+          <div class="order-row" style="padding:5px 0;border:none;font-size:.88rem;"><span class="key">House</span><span class="val" id="cf-house"></span></div>
+          <div class="order-row" style="padding:5px 0;font-size:.88rem;"><span class="key">Banner</span><span class="val" id="cf-banner"></span></div>
+          <div class="order-row" style="padding:5px 0;font-size:.88rem;"><span class="key">Date</span><span class="val" id="cf-date"></span></div>
+          <div class="order-row order-deposit" style="padding-top:8px;font-size:.88rem;"><span class="key">Deposit Paid</span><span class="val" id="cf-deposit"></span></div>
         </div>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-          <a href="tel:5551234567" class="btn btn-blue" style="padding:12px 24px;font-size:.92rem;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:5551234567" class="btn btn-navy btn-md">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             Call Us
           </a>
-          <a href="#" onclick="location.reload()" class="btn btn-white" style="padding:12px 24px;font-size:.92rem;">Book Another Party</a>
+          <button class="btn btn-ghost btn-md" onclick="location.reload()">Book Another Party</button>
+        </div>
+      </div>
+    </div><!-- /wizard-wrap -->
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" id="reviews" style="background:#fff;">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Testimonials</div>
+      <h2 class="section-title">What Parents Are Saying</h2>
+      <p class="section-sub">Hundreds of families trust Pure Play for their most important celebrations.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Pure Play made my son's 7th birthday so special. The bounce house was spotless and the crew set everything up so fast. Kids bounced for 5 hours straight!"</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar" style="background:#1a3a6b;">S</div>
+          <div>
+            <div class="reviewer-name">Sarah M.</div>
+            <div class="reviewer-sub">Classic Castle · Birthday Party</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Best decision ever renting the Splash Zone for our BBQ. Every kid — and some adults — were absolutely soaked and had the time of their lives. 10/10."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar" style="background:#f7941d;">D</div>
+          <div>
+            <div class="reviewer-name">David R.</div>
+            <div class="reviewer-sub">Splash Zone · Summer BBQ</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Communication was perfect from start to finish. On time, professional, equipment was pristine. My daughter still talks about her unicorn castle six months later!"</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar" style="background:#a855f7;">J</div>
+          <div>
+            <div class="reviewer-name">Jessica K.</div>
+            <div class="reviewer-sub">Unicorn Dream · Princess Party</div>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" style="padding:80px 24px;background:#fff;">
-  <div style="max-width:720px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:44px;">
-      <div class="section-tag" style="background:var(--blue);color:#fff;">Questions?</div>
-      <h2 style="font-size:clamp(1.9rem,4vw,2.6rem);font-weight:800;margin-top:12px;">Frequently Asked Questions</h2>
+<section class="section faq-section" id="faq">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
     </div>
-    <div id="faq-list">
+    <div class="faq-list">
       <div class="faq-item">
-        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">How far in advance should I book?<svg class="faq-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">We recommend booking 1–2 weeks ahead, especially for summer weekends. We do take last-minute bookings — just call us!</div>
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">How far in advance should I book? <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">We recommend booking 1–2 weeks in advance, especially for summer weekends. We do accommodate last-minute requests when available — just give us a call.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">Is delivery and setup included?<svg class="faq-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">Yes! Delivery, setup, and takedown are all included within 20 miles. We arrive 60 minutes early so everything is ready before your guests show up.</div>
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">Is delivery and setup included in the price? <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">Yes — delivery, setup, and takedown are included for locations within 20 miles. We arrive 60 minutes early so everything is ready before guests arrive.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">What if it rains on my party day?<svg class="faq-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">We offer a free weather reschedule if severe weather is forecasted. No stress — we'll find you a new date at no extra charge.</div>
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">What if it rains on my party day? <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">We offer a free weather reschedule if severe weather is forecasted. No extra charge — we'll find a new date that works for you.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">How clean are the inflatables?<svg class="faq-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">Every unit is thoroughly cleaned and disinfected with child-safe, hospital-grade cleaners after every single rental. You can inspect before we leave.</div>
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">How clean are the inflatables? <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">Every unit is cleaned and disinfected with child-safe, hospital-grade products after every single rental. You're welcome to inspect the unit when we arrive.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">Can I customize the banner text?<svg class="faq-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-        <div class="faq-a">Absolutely! When you book, choose "Custom Message" in Step 2 and type whatever you'd like. Up to 40 characters. We print and attach it before delivery.</div>
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">Can I use a custom banner message? <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        <div class="faq-a">Absolutely. Select "Custom Message" in Step 2 of the booking flow and type up to 40 characters. We print and attach the banner before delivery.</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <h2>Ready to Make Their Day Amazing?</h2>
+  <p>Party season books fast — lock in your date today.</p>
+  <a href="#book" class="btn btn-primary btn-lg">Book Your Bounce House</a>
+</div>
+
 <!-- FOOTER -->
-<footer style="background:#1a2a4a;padding:44px 24px 24px;">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;margin-bottom:32px;" id="footer-grid">
-      <div>
-        <img src="pureplay.png" alt="Pure Play Rentals" style="height:56px;margin-bottom:14px;"/>
-        <p style="font-size:.88rem;color:#94a3b8;line-height:1.7;max-width:270px;">Making every backyard the best spot in town. Premium inflatables delivered to your door.</p>
-        <div style="display:flex;gap:10px;margin-top:16px;">
-          <a href="#" aria-label="Facebook" style="width:36px;height:36px;background:#1e3a5f;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s;" onmouseover="this.style.background='#2d4f7c'" onmouseout="this.style.background='#1e3a5f'">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#94a3b8" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="#" aria-label="Instagram" style="width:36px;height:36px;background:#1e3a5f;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s;" onmouseover="this.style.background='#2d4f7c'" onmouseout="this.style.background='#1e3a5f'">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-        </div>
-      </div>
-      <div>
-        <h4 style="font-family:'Baloo 2',cursive;font-weight:700;color:#e2e8f0;margin-bottom:12px;font-size:.95rem;">Quick Links</h4>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-          <li><a href="#houses" style="color:#64748b;text-decoration:none;font-size:.88rem;transition:color .2s;" onmouseover="this.style.color='#f7941d'" onmouseout="this.style.color='#64748b'">Our Houses</a></li>
-          <li><a href="#book" style="color:#64748b;text-decoration:none;font-size:.88rem;transition:color .2s;" onmouseover="this.style.color='#f7941d'" onmouseout="this.style.color='#64748b'">Book Now</a></li>
-          <li><a href="#faq" style="color:#64748b;text-decoration:none;font-size:.88rem;transition:color .2s;" onmouseover="this.style.color='#f7941d'" onmouseout="this.style.color='#64748b'">FAQ</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 style="font-family:'Baloo 2',cursive;font-weight:700;color:#e2e8f0;margin-bottom:12px;font-size:.95rem;">Contact</h4>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-          <li style="display:flex;gap:7px;font-size:.87rem;color:#64748b;align-items:center;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5bc8f5" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            (555) 123-4567
-          </li>
-          <li style="display:flex;gap:7px;font-size:.87rem;color:#64748b;align-items:center;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5bc8f5" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            hello@pureplayrentals.com
-          </li>
-          <li style="display:flex;gap:7px;font-size:.87rem;color:#64748b;align-items:center;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5bc8f5" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Mon–Sun, 7am–8pm
-          </li>
-        </ul>
-      </div>
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="pureplay.png" alt="Pure Play Rentals"/>
+      <p>Premium inflatable party rentals delivered to your door. Making every backyard the best spot in town since 2019.</p>
     </div>
-    <div style="border-top:1px solid #1e3a5f;padding-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;">
-      <p style="font-size:.82rem;color:#475569;">© 2025 Pure Play Rentals. All rights reserved.</p>
-      <div style="display:flex;gap:16px;">
-        <a href="#" style="font-size:.82rem;color:#475569;text-decoration:none;">Privacy Policy</a>
-        <a href="#" style="font-size:.82rem;color:#475569;text-decoration:none;">Terms of Service</a>
-      </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#houses">Our Houses</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#book">Book Now</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:5551234567">(555) 123-4567</a></li>
+        <li><a href="mailto:hello@pureplayrentals.com">hello@pureplayrentals.com</a></li>
+        <li><a href="#">Mon–Sun, 7am–8pm</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Pure Play Rentals. All rights reserved.</p>
+    <div style="display:flex;gap:16px;">
+      <a href="#" style="font-size:.82rem;color:#334155;text-decoration:none;">Privacy Policy</a>
+      <a href="#" style="font-size:.82rem;color:#334155;text-decoration:none;">Terms of Service</a>
     </div>
   </div>
 </footer>
 
 <script>
-// ====== STATE ======
-const state = { house: null, banner: null, date: null };
-const houses = [
+// ── STATE ──
+const S = { house: null, banner: null, date: null };
+const HOUSES = [
   { name:'Classic Castle', price:129 },
   { name:'Splash Zone Slide', price:179 },
   { name:'Unicorn Dream', price:149 }
 ];
+const BOOKED = new Set(['2025-07-12','2025-07-19','2025-07-26','2025-08-02','2025-08-09']);
+let calY, calM;
 
-// Simulated booked dates (day numbers in current + next month)
-const bookedDates = new Set(['2025-07-12','2025-07-19','2025-07-26','2025-08-02','2025-08-09']);
+// ── NAV ──
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+document.getElementById('menuBtn').addEventListener('click', () => {
+  const nav = document.getElementById('mobileNav');
+  const open = nav.classList.toggle('open');
+  document.getElementById('menuBtn').setAttribute('aria-expanded', open);
+});
+function closeMenu() { document.getElementById('mobileNav').classList.remove('open'); }
+document.addEventListener('click', e => {
+  if(!document.getElementById('menuBtn').contains(e.target) && !document.getElementById('mobileNav').contains(e.target))
+    document.getElementById('mobileNav').classList.remove('open');
+});
 
-let calYear, calMonth;
-function initCal() {
-  const now = new Date();
-  calYear = now.getFullYear();
-  calMonth = now.getMonth();
-  renderCal();
-}
-
-// ====== STEP NAVIGATION ======
-function goStep(n) {
-  for(let i=1;i<=4;i++){
-    document.getElementById('step-'+i).style.display = 'none';
-  }
-  if(n<=4) document.getElementById('step-'+n).style.display = 'block';
-
-  // Update dots
-  for(let i=1;i<=4;i++){
-    const dot = document.getElementById('sdot-'+i);
-    dot.classList.remove('active','done');
-    if(i<n) dot.classList.add('done');
-    else if(i===n) dot.classList.add('active');
-  }
-  for(let i=1;i<=3;i++){
-    const line = document.getElementById('sline-'+i);
-    line.classList.toggle('done', i<n);
-  }
-
-  if(n===4) fillSummary();
-  document.getElementById('book').scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-// ====== STEP 1: House ======
-function selectHouse(idx) {
-  state.house = idx;
-  document.querySelectorAll('.house-card').forEach((c,i)=>{
-    c.classList.toggle('selected', i===idx);
+// ── SMOOTH SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({ behavior:'smooth', block:'start' }); }
   });
-  document.getElementById('step1-next').disabled = false;
-}
+});
 
-function startBooking(idx) {
-  document.getElementById('book').scrollIntoView({behavior:'smooth',block:'start'});
-  setTimeout(()=>{ selectHouse(idx); goStep(1); }, 300);
-}
+// ── WIZARD STEPS ──
+const STEP_TITLES = [
+  '',
+  'Step 1 — Choose Your Bounce House',
+  'Step 2 — Choose Your Banner',
+  'Step 3 — Pick Your Party Date',
+  'Step 4 — Review & Confirm'
+];
+const STEP_SUBS = [
+  '',
+  'Select the inflatable that\'s right for your party.',
+  'We\'ll print and attach your banner before delivery.',
+  'Select an available date. Red dates are already booked.',
+  'Fill in your details and pay the 25% deposit to secure your booking.'
+];
 
-// ====== STEP 2: Banner ======
-function selectBanner(el, value) {
-  state.banner = value;
-  document.querySelectorAll('.banner-opt').forEach(b=>b.classList.remove('selected'));
-  el.classList.add('selected');
-  if(value !== 'Custom') {
-    document.getElementById('custom-banner-wrap').style.display='none';
-    showBannerPreview(value === 'No Banner' ? null : value);
+function goStep(n) {
+  [1,2,3,4].forEach(i => {
+    document.getElementById('step'+i).style.display = 'none';
+    const f = document.getElementById('step'+i+'-footer');
+    if(f) f.style.display = 'none';
+  });
+  document.getElementById('step-success').style.display = 'none';
+
+  if(n <= 4) {
+    document.getElementById('step'+n).style.display = 'block';
+    const f = document.getElementById('step'+n+'-footer');
+    if(f) f.style.display = 'flex';
   }
-  document.getElementById('step2-next').disabled = false;
+
+  document.getElementById('wiz-title').textContent = STEP_TITLES[n] || '';
+  document.getElementById('wiz-sub').textContent = STEP_SUBS[n] || '';
+
+  // Update progress dots
+  [1,2,3,4].forEach(i => {
+    const d = document.getElementById('pd'+i);
+    d.classList.remove('active','done');
+    if(i < n){ d.classList.add('done'); d.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>'; }
+    else if(i === n){ d.classList.add('active'); d.textContent = i; }
+    else { d.textContent = i; }
+  });
+  [1,2,3].forEach(i => document.getElementById('pl'+i).classList.toggle('done', i < n));
+
+  if(n === 4) fillSummary();
+  document.getElementById('book').scrollIntoView({ behavior:'smooth', block:'start' });
 }
 
-function updateCustomBanner(val) {
-  state.banner = val || 'Custom';
-  showBannerPreview(val);
-  document.getElementById('step2-next').disabled = val.trim().length === 0;
+// ── STEP 1 ──
+function pickHouse(idx) {
+  S.house = idx;
+  document.querySelectorAll('.wiz-house').forEach((c,i) => c.classList.toggle('selected', i===idx));
+  document.getElementById('btn-s1').disabled = false;
+}
+function startBooking(idx) {
+  document.getElementById('book').scrollIntoView({ behavior:'smooth', block:'start' });
+  setTimeout(() => { pickHouse(idx); goStep(1); }, 200);
 }
 
-function showBannerPreview(text) {
-  const wrap = document.getElementById('banner-preview');
-  if(!text){ wrap.style.display='none'; return; }
-  wrap.style.display='block';
+// ── STEP 2 ──
+function pickBanner(el, val) {
+  S.banner = val;
+  document.querySelectorAll('.banner-opt').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  if(val !== 'Custom') {
+    document.getElementById('custom-wrap').style.display = 'none';
+    showPreview(val === 'No Banner' ? null : val);
+    document.getElementById('btn-s2').disabled = false;
+  } else {
+    const v = document.getElementById('custom-text').value.trim();
+    showPreview(v || null);
+    document.getElementById('btn-s2').disabled = v.length === 0;
+  }
+}
+function onCustomText(v) {
+  document.getElementById('char-count').textContent = v.length + ' / 40 characters';
+  S.banner = v || 'Custom';
+  showPreview(v || null);
+  document.getElementById('btn-s2').disabled = v.trim().length === 0;
+}
+function showPreview(text) {
+  const box = document.getElementById('banner-preview');
+  if(!text){ box.style.display = 'none'; return; }
+  box.style.display = 'block';
   document.getElementById('preview-text').textContent = text;
 }
 
-// ====== STEP 3: Calendar ======
+// ── STEP 3: CALENDAR ──
+function initCal() {
+  const now = new Date();
+  calY = now.getFullYear(); calM = now.getMonth();
+  renderCal();
+}
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 function renderCal() {
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('cal-month-label').textContent = months[calMonth]+' '+calYear;
-
-  const firstDay = new Date(calYear, calMonth, 1).getDay();
-  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  document.getElementById('cal-label').textContent = MONTHS[calM] + ' ' + calY;
+  const firstDay = new Date(calY, calM, 1).getDay();
+  const daysIn = new Date(calY, calM+1, 0).getDate();
   const today = new Date(); today.setHours(0,0,0,0);
   const grid = document.getElementById('cal-days');
   grid.innerHTML = '';
+  const prevBtn = document.getElementById('cal-prev');
+  prevBtn.disabled = new Date(calY, calM) <= new Date(today.getFullYear(), today.getMonth());
 
-  // Prev month btn
-  const prevMonthDate = new Date(calYear, calMonth, 1);
-  document.getElementById('prev-month-btn').disabled = prevMonthDate <= new Date(today.getFullYear(), today.getMonth(), 1);
-
-  // Empty cells
-  for(let i=0;i<firstDay;i++){
+  for(let i=0;i<firstDay;i++){ const d=document.createElement('div'); d.className='cal-day empty'; grid.appendChild(d); }
+  for(let day=1; day<=daysIn; day++){
     const d = document.createElement('div');
-    d.className='cal-day empty';
-    grid.appendChild(d);
-  }
-
-  for(let day=1;day<=daysInMonth;day++){
-    const d = document.createElement('div');
-    const dateObj = new Date(calYear, calMonth, day);
-    const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-
-    if(dateObj < today){
-      d.className='cal-day past'; d.textContent=day;
-    } else if(bookedDates.has(dateStr)){
-      d.className='cal-day taken'; d.textContent=day; d.title='Already booked';
-    } else {
-      d.className='cal-day available';
-      if(state.date===dateStr) d.classList.add('selected');
-      d.textContent=day;
-      d.addEventListener('click',()=>pickDate(dateStr,day));
+    const dObj = new Date(calY, calM, day);
+    const ds = `${calY}-${String(calM+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const isToday = dObj.getTime() === today.getTime();
+    if(dObj < today){ d.className='cal-day past'; }
+    else if(BOOKED.has(ds)){ d.className='cal-day taken'; d.title='Already booked'; }
+    else {
+      d.className='cal-day avail' + (isToday?' today':'') + (S.date===ds?' selected':'');
+      d.addEventListener('click', () => { S.date=ds; renderCal(); document.getElementById('btn-s3').disabled=false; });
     }
+    d.textContent = day;
     grid.appendChild(d);
   }
 }
-
-function pickDate(dateStr, day) {
-  state.date = dateStr;
-  document.querySelectorAll('.cal-day').forEach(d=>d.classList.remove('selected'));
-  event.target.classList.add('selected');
-  document.getElementById('step3-next').disabled = false;
-}
-
 function changeMonth(dir) {
-  calMonth += dir;
-  if(calMonth>11){calMonth=0;calYear++;}
-  if(calMonth<0){calMonth=11;calYear--;}
+  calM += dir;
+  if(calM>11){calM=0;calY++;} if(calM<0){calM=11;calY--;}
   renderCal();
 }
 
-// ====== STEP 4: Summary ======
+// ── STEP 4 ──
 function fillSummary() {
-  const h = houses[state.house];
-  const bannerDisplay = state.banner==='Custom'
-    ? (document.getElementById('custom-banner-text').value || 'Custom')
-    : state.banner;
-  const deposit = Math.round(h.price * 0.25);
-  const dateFormatted = state.date ? new Date(state.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}) : '—';
-
-  document.getElementById('summary-house').textContent = h.name;
-  document.getElementById('summary-banner').textContent = bannerDisplay;
-  document.getElementById('summary-date').textContent = dateFormatted;
-  document.getElementById('summary-total').textContent = '$'+h.price;
-  document.getElementById('summary-deposit').textContent = '$'+deposit;
+  const h = HOUSES[S.house];
+  const bannerText = S.banner==='Custom' ? (document.getElementById('custom-text').value||'Custom') : S.banner;
+  const dep = Math.round(h.price * 0.25);
+  const dateFmt = S.date ? new Date(S.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}) : '—';
+  document.getElementById('os-house').textContent = h.name;
+  document.getElementById('os-banner').textContent = bannerText;
+  document.getElementById('os-date').textContent = dateFmt;
+  document.getElementById('os-total').textContent = '$'+h.price;
+  document.getElementById('os-deposit').textContent = '$'+dep;
+  // resize pay grid for mobile
+  if(window.innerWidth < 768) document.getElementById('pay-grid').style.gridTemplateColumns = '1fr';
 }
 
-// ====== PAYMENT ======
-function formatCard(el) {
-  let v = el.value.replace(/\D/g,'').substring(0,16);
-  el.value = v.replace(/(.{4})/g,'$1 ').trim();
-}
-function formatExp(el) {
-  let v = el.value.replace(/\D/g,'').substring(0,4);
-  if(v.length>2) v = v.substring(0,2)+'/'+v.substring(2);
-  el.value = v;
-}
+// ── PAYMENT ──
+function fmtCard(el){ let v=el.value.replace(/\D/g,'').substring(0,16); el.value=v.replace(/(.{4})/g,'$1 ').trim(); }
+function fmtExp(el){ let v=el.value.replace(/\D/g,'').substring(0,4); if(v.length>2)v=v.substring(0,2)+'/'+v.substring(2); el.value=v; }
 
-function submitBooking() {
-  const btn = document.getElementById('pay-btn');
-  const fields = ['pay-fname','pay-lname','pay-email','pay-phone','pay-address','pay-name','pay-card','pay-exp','pay-cvv'];
-  let valid = true;
-  fields.forEach(id=>{
+function submitPay() {
+  const fields = ['pf-fname','pf-lname','pf-email','pf-phone','pf-addr','pf-cname','pf-cnum','pf-exp','pf-cvv'];
+  let ok = true;
+  fields.forEach(id => {
     const el = document.getElementById(id);
-    if(!el.value.trim()){ el.style.borderColor='#f97316'; valid=false; }
-    else el.style.borderColor='var(--blue)';
+    if(!el.value.trim()){ el.classList.add('error'); ok=false; }
+    else el.classList.remove('error');
   });
-  if(!valid){ return; }
+  if(!ok) return;
 
-  btn.textContent='Processing...'; btn.disabled=true;
+  const btn = document.getElementById('pay-btn');
+  btn.textContent = 'Processing…'; btn.disabled = true;
 
-  setTimeout(()=>{
-    const h = houses[state.house];
-    const bannerDisplay = state.banner==='Custom'
-      ? (document.getElementById('custom-banner-text').value || 'Custom')
-      : state.banner;
-    const deposit = Math.round(h.price * 0.25);
-    const dateFormatted = state.date ? new Date(state.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}) : '—';
-
-    document.getElementById('conf-house').textContent = h.name;
-    document.getElementById('conf-banner').textContent = bannerDisplay;
-    document.getElementById('conf-date').textContent = dateFormatted;
-    document.getElementById('conf-deposit').textContent = '$'+deposit+' paid';
-
-    // Hide all steps, show success
-    for(let i=1;i<=4;i++) document.getElementById('step-'+i).style.display='none';
-    document.getElementById('step-success').style.display='block';
-
-    // Mark dot 4 done
-    for(let i=1;i<=4;i++) document.getElementById('sdot-'+i).classList.add('done');
+  setTimeout(() => {
+    const h = HOUSES[S.house];
+    const bannerText = S.banner==='Custom' ? (document.getElementById('custom-text').value||'Custom') : S.banner;
+    const dep = Math.round(h.price * 0.25);
+    const dateFmt = S.date ? new Date(S.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}) : '—';
+    document.getElementById('cf-house').textContent = h.name;
+    document.getElementById('cf-banner').textContent = bannerText;
+    document.getElementById('cf-date').textContent = dateFmt;
+    document.getElementById('cf-deposit').textContent = '$'+dep+' paid';
+    [1,2,3,4].forEach(i=>{ document.getElementById('step'+i).style.display='none'; const f=document.getElementById('step'+i+'-footer'); if(f) f.style.display='none'; });
+    document.getElementById('step-success').style.display = 'block';
+    document.getElementById('wiz-title').textContent = 'Booking Confirmed!';
+    document.getElementById('wiz-sub').textContent = '';
+    [1,2,3,4].forEach(i=>{ const d=document.getElementById('pd'+i); d.classList.add('done'); d.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>'; });
     document.getElementById('book').scrollIntoView({behavior:'smooth',block:'start'});
-  }, 1600);
+  }, 1800);
 }
 
-// ====== FAQ ======
-document.querySelectorAll('.faq-q').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const item = btn.closest('.faq-item');
-    const open = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>{ i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+// ── FAQ ──
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item'), open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
     if(!open){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
   });
-  btn.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); btn.click(); }});
+  btn.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); btn.click(); }});
 });
 
-// ====== SMOOTH SCROLL ======
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t = document.querySelector(a.getAttribute('href'));
-    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
-  });
-});
-
-// ====== RESPONSIVE ======
-function resp() {
-  const hg = document.getElementById('hero-grid');
-  const fg = document.getElementById('footer-grid');
-  const pfg = document.getElementById('pay-form-grid');
-  const m = window.innerWidth < 768;
-  if(hg) hg.style.gridTemplateColumns = m?'1fr':'1fr 1fr';
-  if(fg) fg.style.gridTemplateColumns = m?'1fr':'2fr 1fr 1fr';
-  if(pfg) pfg.style.gridTemplateColumns = m?'1fr':'1fr 1fr';
-}
-resp(); window.addEventListener('resize', resp);
-
-// ====== INIT ======
+// ── INIT ──
 initCal();
 goStep(1);
 </script>
-
-<style>
-@media(max-width:768px){
-  #hero-grid{grid-template-columns:1fr!important}
-  #hero-grid>div:last-child{order:-1;max-width:240px;margin:0 auto}
-  #footer-grid{grid-template-columns:1fr!important}
-  #pay-form-grid{grid-template-columns:1fr!important}
-  .step-line{width:28px}
-}
-</style>
 </body>
 </html>
