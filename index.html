@@ -1219,7 +1219,15 @@
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .sp-inner { grid-template-columns: 1fr 1fr; gap: 16px; }
       .sp-divider { display: none; }
-      .sp-item { padding: 12px 16px; border-radius: 12px; background: var(--light); }
+      .sp-item {
+        padding: 20px 16px;
+        border-radius: 12px;
+        background: var(--light);
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+      }
       .testi-grid { grid-template-columns: 1fr; }
       .testi-card.featured { grid-row: auto; }
     }
