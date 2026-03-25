@@ -1237,7 +1237,6 @@
     }
 
     @media (max-width: 640px) {
-      .hero-bg video { display: block !important; }
       .about-img-side { background: url('hero-mobile-bounce-house.png') center/cover no-repeat; }
       .about-img-side img { display: none; }
       .sp-inner { grid-template-columns: 1fr 1fr; }
@@ -1890,16 +1889,6 @@
       });
     });
   </script>
-  <script>
-    // Force hero video playback on mobile
-    var heroVid = document.querySelector('.hero-bg video');
-    if (heroVid) {
-      heroVid.muted = true;
-      heroVid.play().catch(function(){});
-      document.addEventListener('touchstart', function() {
-        heroVid.play().catch(function(){});
-      }, { once: true });
-    }
-  </script>
+
 </body>
 </html>
