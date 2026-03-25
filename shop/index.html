@@ -207,6 +207,22 @@
     }
     .shop-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
     .shop-card:hover .shop-card-img img { transform: scale(1.04); }
+    .shop-card.sold-out { pointer-events: none; }
+    .shop-card.sold-out .shop-card-img img { filter: grayscale(1); opacity: 0.55; }
+    .shop-card.sold-out .shop-card-body { opacity: 0.6; }
+    .shop-card.sold-out:hover { transform: none; box-shadow: var(--shadow); }
+    .sold-out-overlay {
+      position: absolute; inset: 0;
+      background: rgba(13,31,60,0.55);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sold-out-pill {
+      background: #1a1a2e; color: #fff;
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 8px 22px; border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.25);
+    }
 
     .shop-badge {
       position: absolute; top: 14px; left: 14px;
@@ -374,7 +390,7 @@
   <section class="shop-section">
     <div class="shop-inner">
       <div class="shop-header">
-        <h2>Bounce House Rentals in Chicago <span style="color:var(--orange);">(3)</span></h2>
+        <h2>Bounce House Rentals in Chicago <span style="color:var(--orange);">(4)</span></h2>
         <p>All inflatables are commercial-grade, sanitized, and inspected before every Chicago delivery. One flat price: $300/day.</p>
       </div>
       <div class="shop-grid" id="shopGrid">
@@ -561,6 +577,40 @@
             <div class="shop-card-btns">
               <a href="/book" class="btn btn-outline-orange">Check Availability</a>
               <a href="/book" class="btn btn-orange">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4: Water Slide (Sold Out) -->
+        <div class="shop-card sold-out" data-category="water">
+          <div class="shop-card-img">
+            <img src="../waterslide-rental-chicago.png" alt="Water slide rental Chicago — currently unavailable" loading="lazy" />
+            <div class="sold-out-overlay">
+              <span class="sold-out-pill">Sold Out</span>
+            </div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-top">
+              <h3 class="shop-card-title">18 ft Mega Water Slide</h3>
+              <div class="shop-price" style="color:var(--muted);">$300<small>/day</small></div>
+            </div>
+            <p class="shop-card-desc">Our towering 18 ft water slide with a landing splash pool. A summer staple for Chicagoland backyard parties. Currently unavailable — check back soon or give us a call to get on the waitlist.</p>
+            <div class="shop-specs">
+              <div class="shop-spec">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                18 ft tall
+              </div>
+              <div class="shop-spec">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                Ages 5 to 15
+              </div>
+              <div class="shop-spec">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Up to 10 kids
+              </div>
+            </div>
+            <div class="shop-card-btns" style="margin-top:auto;padding-top:20px;">
+              <a href="tel:+17735847821" class="btn btn-navy" style="pointer-events:all;">Join Waitlist</a>
             </div>
           </div>
         </div>
