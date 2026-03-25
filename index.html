@@ -877,133 +877,118 @@
 
     /* ===================== TESTIMONIALS ===================== */
     .testimonials {
-      background: var(--navy);
-      padding: 100px 5% 112px;
+      background: #fff8f2;
+      padding: 96px 5%;
       position: relative;
       overflow: hidden;
     }
-
-    /* Decorative grid lines */
     .testimonials::before {
-      content: '';
+      content: '\201C';
+      font-family: Georgia, serif;
+      font-size: 28rem;
+      line-height: 1;
+      color: var(--orange);
+      opacity: 0.05;
       position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 60px 60px;
+      top: -60px; left: -20px;
       pointer-events: none;
-    }
-    /* Orange glow top-right */
-    .testimonials::after {
-      content: '';
-      position: absolute;
-      top: -120px; right: -80px;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(247,148,29,0.10) 0%, transparent 70%);
-      pointer-events: none;
+      user-select: none;
     }
 
     .testi-header {
       text-align: center;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
+      margin-bottom: 56px;
     }
     .testi-header .section-label { color: var(--orange); }
-    .testi-header .section-title { color: var(--white); margin-bottom: 20px; }
+    .testi-header .section-title { color: var(--navy); margin-bottom: 16px; }
 
-    /* Rating summary pill */
     .testi-rating-pill {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
+      background: var(--white);
+      border: 1.5px solid rgba(247,148,29,0.3);
       border-radius: 50px;
       padding: 8px 20px;
-      margin-bottom: 56px;
+      box-shadow: 0 2px 12px rgba(247,148,29,0.10);
     }
     .testi-rating-pill .stars { display: flex; gap: 3px; }
     .testi-rating-pill span {
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.7);
+      color: var(--muted);
     }
-    .testi-rating-pill strong { color: var(--white); }
+    .testi-rating-pill strong { color: var(--navy); }
 
+    /* Asymmetric layout: big left + two stacked right */
     .testi-grid {
-      max-width: 1140px;
+      max-width: 1100px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1.08fr 1fr;
+      grid-template-columns: 1.15fr 1fr;
+      grid-template-rows: auto auto;
       gap: 20px;
-      align-items: start;
-      position: relative;
-      z-index: 1;
+      align-items: stretch;
     }
 
     .testi-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--white);
       border-radius: 24px;
-      padding: 32px 28px 28px;
+      padding: 36px 32px;
       position: relative;
-      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(13,31,60,0.07);
+      border: 1.5px solid rgba(13,31,60,0.06);
       opacity: 0;
-      transform: translateY(24px);
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-    .testi-card::before {
-      content: '\201C';
-      font-family: Georgia, serif;
-      font-size: 8rem;
-      line-height: 1;
-      color: var(--orange);
-      opacity: 0.08;
-      position: absolute;
-      top: -12px; right: 20px;
-      pointer-events: none;
-      user-select: none;
+      transform: translateY(20px);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
     .testi-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(247,148,29,0.3);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+      box-shadow: 0 12px 40px rgba(13,31,60,0.13);
     }
     .testi-card.visible {
       opacity: 1;
       transform: translateY(0);
-      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, box-shadow 0.3s;
+      transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
     }
-    /* Featured middle card */
+
+    /* Featured = spans both rows on the left */
     .testi-card.featured {
-      background: rgba(247,148,29,0.08);
-      border-color: rgba(247,148,29,0.30);
-      margin-top: -16px;
-      padding-top: 40px;
+      grid-row: 1 / 3;
+      display: flex;
+      flex-direction: column;
+      border-left: 4px solid var(--orange);
+      padding-left: 32px;
     }
-    .testi-card.featured::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--orange), #f97316);
-      border-radius: 24px 24px 0 0;
+    .testi-card.featured .testi-text {
+      font-size: 1.18rem;
+      line-height: 1.75;
+      flex: 1;
     }
+    .testi-card.featured .testi-big-quote {
+      font-family: Georgia, serif;
+      font-size: 4rem;
+      line-height: 0.8;
+      color: var(--orange);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    /* Side cards (right column) */
+    .testi-card.side { padding: 28px 28px; }
+    .testi-card.side .testi-text { font-size: 0.92rem; }
 
     .testi-stars {
       display: flex;
       gap: 3px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .testi-text {
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.80);
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #374151;
       margin-bottom: 24px;
     }
 
@@ -1011,8 +996,9 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 16px;
+      border-top: 1px solid var(--gray);
+      margin-top: auto;
     }
 
     .testi-avatar {
@@ -1028,9 +1014,16 @@
       flex-shrink: 0;
     }
 
-    .testi-name { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; color: var(--white); }
-    .testi-loc { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 1px; }
-    .testi-source { font-size: 0.72rem; color: var(--orange); font-weight: 600; margin-top: 2px; }
+    .testi-name { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; color: var(--navy); }
+    .testi-loc { font-size: 0.75rem; color: var(--muted); margin-top: 1px; }
+    .testi-source {
+      font-size: 0.7rem;
+      color: var(--orange);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
 
     /* ===================== FAQ ===================== */
     .faq-section {
@@ -1231,6 +1224,8 @@
       .sp-inner { grid-template-columns: 1fr 1fr; gap: 16px; }
       .sp-divider { display: none; }
       .sp-item { padding: 12px 16px; border-radius: 12px; background: var(--light); }
+      .testi-grid { grid-template-columns: 1fr; }
+      .testi-card.featured { grid-row: auto; }
     }
 
     @media (max-width: 640px) {
@@ -1617,15 +1612,17 @@
     </div>
     <div class="testi-grid">
 
-      <div class="testi-card">
+      <!-- Featured: spans both rows on the left -->
+      <div class="testi-card featured">
+        <span class="testi-big-quote" aria-hidden="true">"</span>
         <div class="testi-stars">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <p class="testi-text">"The setup crew was on time, professional, and the kids absolutely lost it when they saw the bounce house. Best birthday party we have ever thrown in Naperville. Booking again for sure."</p>
+        <p class="testi-text">The setup crew was on time, professional, and the kids absolutely lost it when they saw the bounce house. Best birthday party we have ever thrown in Naperville. Every single detail was handled — we didn't have to lift a finger. Booking again for sure.</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:var(--orange);">JR</div>
           <div>
@@ -1636,15 +1633,16 @@
         </div>
       </div>
 
-      <div class="testi-card featured">
+      <!-- Side card 1 -->
+      <div class="testi-card side">
         <div class="testi-stars">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <p class="testi-text">"Got the wet combo for my son's 8th birthday in Schaumburg in July. Every single kid stayed in it for hours. The water slide made the whole thing. Easy booking, zero stress. Pure Play is legit."</p>
+        <p class="testi-text">Got the bounce house for my son's 8th birthday in Schaumburg. Every single kid stayed in it for hours. Easy booking, zero stress. Pure Play is legit.</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:var(--red);">MT</div>
           <div>
@@ -1655,15 +1653,16 @@
         </div>
       </div>
 
-      <div class="testi-card">
+      <!-- Side card 2 -->
+      <div class="testi-card side">
         <div class="testi-stars">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <p class="testi-text">"Rented for our school's field day in Aurora and they were nothing but professional. Clean, safe equipment, showed up early, made sure everything was perfect. Highly recommend to anyone in Chicagoland!"</p>
+        <p class="testi-text">Rented for our school's field day in Aurora. Clean, safe equipment, showed up early, made sure everything was perfect. Highly recommend to anyone in Chicagoland!</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:#22c55e;">KL</div>
           <div>
