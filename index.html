@@ -622,7 +622,9 @@
       font-weight: 900;
       font-size: 1.5rem;
       color: var(--orange);
+      display: flex; align-items: baseline; gap: 6px;
     }
+    .price-was { font-size: 0.9rem; font-weight: 700; color: var(--muted); text-decoration: line-through; }
 
     .card-age { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
 
@@ -1230,6 +1232,8 @@
       }
       .testi-grid { grid-template-columns: 1fr; }
       .testi-card.featured { grid-row: auto; }
+      .testi-card.featured .testi-text { font-size: 0.92rem; line-height: 1.65; flex: none; }
+      .testi-card.featured .testi-big-quote { font-size: 2.5rem; margin-bottom: 8px; }
     }
 
     @media (max-width: 640px) {
@@ -1362,7 +1366,7 @@
           <h3 class="card-title">Rainbow Combo Bounce House</h3>
           <p class="card-desc">Full bounce room, climbing wall, and slide in one. The most popular bounce house rental in Chicago for birthday parties, school events, and family gatherings across Chicagoland.</p>
           <div class="card-meta">
-            <span class="card-price">$300<small style="font-size:0.75rem;font-weight:600;">/day</small></span>
+            <span class="card-price"><span class="price-was">$350</span>$300<small style="font-size:0.75rem;font-weight:600;">/day</small></span>
             <span class="card-age">Ages 3 to 14</span>
           </div>
           <div class="card-btns">
@@ -1381,7 +1385,7 @@
           <h3 class="card-title">Rainbow Combo Bounce House</h3>
           <p class="card-desc">Commercial-grade rainbow bounce house with bounce room, climbing wall, and dry slide. Delivered, set up, and sanitized for every Chicago and Chicagoland rental.</p>
           <div class="card-meta">
-            <span class="card-price">$300<small style="font-size:0.75rem;font-weight:600;">/day</small></span>
+            <span class="card-price"><span class="price-was">$350</span>$300<small style="font-size:0.75rem;font-weight:600;">/day</small></span>
             <span class="card-age">Ages 3 to 14</span>
           </div>
           <div class="card-btns">
@@ -1400,7 +1404,7 @@
           <h3 class="card-title">Rainbow Combo Bounce House</h3>
           <p class="card-desc">Commercial-grade rainbow bounce house with bounce room, climbing wall, and dry slide. Delivered, set up, and sanitized for every Chicago and Chicagoland rental.</p>
           <div class="card-meta">
-            <span class="card-price">$300<small style="font-size:0.75rem;font-weight:600;">/day</small></span>
+            <span class="card-price"><span class="price-was">$350</span>$300<small style="font-size:0.75rem;font-weight:600;">/day</small></span>
             <span class="card-age">Ages 3 to 14</span>
           </div>
           <div class="card-btns">
@@ -1649,7 +1653,7 @@
         </div>
         <p class="testi-text">Got the bounce house for my son's 8th birthday in Schaumburg. Every single kid stayed in it for hours. Easy booking, zero stress. Pure Play is legit.</p>
         <div class="testi-author">
-          <div class="testi-avatar" style="background:var(--red);">MT</div>
+          <div class="testi-avatar" style="background:#22c55e;">MT</div>
           <div>
             <div class="testi-name">Marcus T.</div>
             <div class="testi-loc">Schaumburg, IL</div>
