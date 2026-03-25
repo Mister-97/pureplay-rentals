@@ -319,7 +319,7 @@
     .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
 
     .selected-date-display {
-      margin-top: 20px; margin-bottom: 32px;
+      margin-top: 20px; margin-bottom: 24px;
       background: rgba(247,148,29,0.08); border: 2px solid rgba(247,148,29,0.3);
       border-radius: var(--radius); padding: 14px 18px;
       font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem;
@@ -328,6 +328,38 @@
     }
     .selected-date-display.show { display: flex; }
     .selected-date-display span { color: var(--orange); }
+
+    /* ===== TIME SLOTS ===== */
+    .time-slots-wrap {
+      display: none; margin-bottom: 32px;
+    }
+    .time-slots-wrap.show { display: block; }
+    .time-slots-label {
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem;
+      color: var(--navy); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .time-slots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+    }
+    .time-slot {
+      padding: 12px 10px;
+      border-radius: 12px;
+      border: 2px solid #e5e7eb;
+      background: var(--white);
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.88rem;
+      color: var(--text);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.18s;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+    }
+    .time-slot:hover:not(.unavailable) { border-color: var(--orange); color: var(--orange); background: rgba(247,148,29,0.06); }
+    .time-slot.selected { background: var(--orange); color: var(--white); border-color: var(--orange); }
+    .time-slot.unavailable { opacity: 0.4; cursor: not-allowed; text-decoration: line-through; }
+    .time-slot-sub { font-size: 0.72rem; font-weight: 600; opacity: 0.75; }
 
     /* ===== STEP 4: CONTACT + PAYMENT ===== */
     .step4-layout { display: grid; grid-template-columns: 1fr 340px; gap: 32px; }
@@ -663,6 +695,17 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             You selected: <span id="selectedDateText"></span>
           </div>
+
+          <!-- TIME SLOT PICKER (shown after date is selected) -->
+          <div class="time-slots-wrap" id="timeSlotsWrap">
+            <div class="time-slots-label">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Select a Delivery Time
+            </div>
+            <div class="time-slots-grid" id="timeSlotsGrid">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
         </div>
 
         <!-- STEP 4: Contact + Payment -->
@@ -753,6 +796,10 @@
               <div class="summary-item">
                 <span class="si-label">Date</span>
                 <span class="si-val" id="summaryDate">-</span>
+              </div>
+              <div class="summary-item">
+                <span class="si-label">Time</span>
+                <span class="si-val" id="summaryTime">-</span>
               </div>
               <div class="summary-item">
                 <span class="si-label">Delivery</span>
@@ -884,6 +931,7 @@
       selectedInf: null,
       bannerText: 'Happy Birthday!',
       selectedDate: null,
+      selectedTime: null,
     };
 
     // ====== STEP NAVIGATION ======
@@ -911,6 +959,7 @@
         goToStep(3);
       } else if (state.step === 3) {
         if (!state.selectedDate) { alert('Please pick a date from the calendar.'); return; }
+        if (!state.selectedTime) { alert('Please select a delivery time.'); return; }
         goToStep(4);
       } else if (state.step === 4) {
         if (validateStep4()) submitBooking();
@@ -1040,10 +1089,54 @@
       document.querySelectorAll('.cal-day').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
       state.selectedDate = { d, m, y };
+      state.selectedTime = null;
       const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       const display = document.getElementById('selectedDateDisplay');
       display.classList.add('show');
       document.getElementById('selectedDateText').textContent = `${MONTHS[m]} ${d}, ${y}`;
+      renderTimeSlots(d, m, y);
+    }
+
+    // ====== STEP 3: TIME SLOTS ======
+    const TIME_SLOTS = [
+      { label: '8:00 AM',  sub: 'Morning',   value: '08:00' },
+      { label: '10:00 AM', sub: 'Morning',   value: '10:00' },
+      { label: '12:00 PM', sub: 'Afternoon', value: '12:00' },
+      { label: '2:00 PM',  sub: 'Afternoon', value: '14:00' },
+      { label: '4:00 PM',  sub: 'Evening',   value: '16:00' },
+    ];
+
+    // Slots that are "already booked" for demo purposes (keyed by "YYYY-MM-DD")
+    const BOOKED_SLOTS = {};
+
+    function renderTimeSlots(d, m, y) {
+      const wrap = document.getElementById('timeSlotsWrap');
+      const grid = document.getElementById('timeSlotsGrid');
+      wrap.classList.add('show');
+      grid.innerHTML = '';
+
+      const dateKey = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const bookedForDay = BOOKED_SLOTS[dateKey] || [];
+
+      TIME_SLOTS.forEach(slot => {
+        const btn = document.createElement('button');
+        const isUnavailable = bookedForDay.includes(slot.value);
+        btn.className = 'time-slot' + (isUnavailable ? ' unavailable' : '');
+        btn.innerHTML = `${slot.label}<span class="time-slot-sub">${slot.sub}</span>`;
+        btn.setAttribute('aria-label', `Delivery at ${slot.label}`);
+        btn.disabled = isUnavailable;
+        if (!isUnavailable) {
+          btn.addEventListener('click', () => selectTimeSlot(slot.value, btn));
+        }
+        if (state.selectedTime === slot.value) btn.classList.add('selected');
+        grid.appendChild(btn);
+      });
+    }
+
+    function selectTimeSlot(value, btn) {
+      state.selectedTime = value;
+      document.querySelectorAll('.time-slot').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
     }
 
     initCalendar();
@@ -1057,6 +1150,10 @@
       if (state.selectedDate) {
         const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         document.getElementById('summaryDate').textContent = `${MONTHS[state.selectedDate.m]} ${state.selectedDate.d}, ${state.selectedDate.y}`;
+      }
+      if (state.selectedTime) {
+        const slot = TIME_SLOTS.find(s => s.value === state.selectedTime);
+        document.getElementById('summaryTime').textContent = slot ? slot.label : state.selectedTime;
       }
       document.getElementById('summaryTotal').textContent = `$${inf.price}`;
     }
