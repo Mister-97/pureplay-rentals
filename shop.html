@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — Pure Play Rentals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1f3c;
+      --navy-light: #162d54;
+      --orange: #f7941d;
+      --orange-dark: #d97a0f;
+      --red: #e8272c;
+      --yellow: #ffd600;
+      --white: #ffffff;
+      --light: #f9fafb;
+      --gray: #f3f4f6;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --radius: 20px;
+      --radius-lg: 28px;
+      --shadow: 0 4px 24px rgba(13,31,60,0.10);
+      --shadow-lg: 0 12px 48px rgba(13,31,60,0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Nunito', sans-serif; font-weight: 900; line-height: 1.1; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 5%; height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .navbar.scrolled { background: var(--white); box-shadow: 0 2px 20px rgba(0,0,0,0.10); }
+    .navbar.scrolled .nav-link { color: var(--navy); text-shadow: none; }
+    .navbar.scrolled .hamburger span { background: var(--navy); }
+    .navbar.scrolled .nav-logo img { filter: none; }
+    .nav-logo img { height: 52px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35)); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-link {
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem;
+      color: var(--white); letter-spacing: 0.3px; transition: color 0.2s;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    }
+    .nav-link:hover { color: var(--orange); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 28px; border-radius: 50px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem;
+      cursor: pointer; transition: all 0.22s; border: none; letter-spacing: 0.2px;
+    }
+    .btn-orange { background: var(--orange); color: var(--white); }
+    .btn-orange:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(247,148,29,0.45); }
+    .btn-white-ghost { background: transparent; color: var(--white); border: 2.5px solid rgba(255,255,255,0.75); }
+    .btn-white-ghost:hover { background: rgba(255,255,255,0.12); border-color: var(--white); }
+    .btn-navy { background: var(--navy); color: var(--white); }
+    .btn-navy:hover { background: var(--navy-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13,31,60,0.35); }
+    .btn-outline-orange { background: transparent; color: var(--orange); border: 2.5px solid var(--orange); }
+    .btn-outline-orange:hover { background: var(--orange); color: var(--white); }
+    .btn-outline-white { background: transparent; color: var(--white); border: 2.5px solid var(--white); }
+    .btn-outline-white:hover { background: var(--white); color: var(--navy); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 26px; height: 2.5px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: var(--white); padding: 24px 5% 32px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); z-index: 999; flex-direction: column; gap: 4px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--navy); padding: 12px 0; border-bottom: 1px solid var(--gray); }
+    .mobile-menu .btn { margin-top: 16px; width: 100%; }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      position: relative; height: 50vh; min-height: 380px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .page-hero-bg { position: absolute; inset: 0; background: url('field-photo.png') center center / cover no-repeat; }
+    .page-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(13,31,60,0.78) 0%, rgba(13,31,60,0.5) 100%);
+    }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; padding: 0 24px; }
+    .page-hero-content h1 { font-size: clamp(2.6rem, 6vw, 4.5rem); color: var(--white); margin-bottom: 16px; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+    .page-hero-content p { font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 480px; margin: 0 auto; line-height: 1.7; }
+    .page-hero-curve { position: absolute; bottom: -2px; left: 0; width: 100%; line-height: 0; z-index: 3; }
+    .page-hero-curve svg { display: block; width: 100%; height: auto; }
+
+    /* ===== FILTER BAR ===== */
+    .filter-bar { background: var(--white); padding: 32px 5% 8px; border-bottom: 1px solid var(--gray); }
+    .filter-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .filter-label { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-right: 4px; }
+    .filter-pill {
+      padding: 8px 20px; border-radius: 50px; border: 2px solid var(--gray);
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.85rem;
+      color: var(--muted); background: var(--white); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-pill:hover { border-color: var(--orange); color: var(--orange); }
+    .filter-pill.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+    /* ===== SHOP GRID ===== */
+    .shop-section { padding: 56px 5% 88px; background: var(--light); }
+    .shop-inner { max-width: 1160px; margin: 0 auto; }
+
+    .shop-header { margin-bottom: 40px; }
+    .shop-header h2 { font-size: 1.6rem; color: var(--navy); }
+    .shop-header p { font-size: 0.95rem; color: var(--muted); margin-top: 6px; }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 32px;
+    }
+
+    .shop-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .shop-card.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
+    }
+    .shop-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+    .shop-card-img {
+      position: relative;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: var(--gray);
+    }
+    .shop-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .shop-card:hover .shop-card-img img { transform: scale(1.04); }
+
+    .shop-badge {
+      position: absolute; top: 14px; left: 14px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.75rem;
+      padding: 4px 12px; border-radius: 50px; color: var(--white);
+    }
+
+    .shop-card-body { padding: 28px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+
+    .shop-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .shop-card-title { font-size: 1.2rem; color: var(--navy); }
+    .shop-price { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.4rem; color: var(--orange); white-space: nowrap; }
+    .shop-price small { font-size: 0.7rem; font-weight: 600; }
+
+    .shop-card-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+
+    .shop-specs {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+    }
+    .shop-spec {
+      display: flex; align-items: center; gap: 5px;
+      background: var(--light); border-radius: 8px; padding: 6px 12px;
+      font-size: 0.8rem; font-weight: 500; color: var(--navy);
+    }
+
+    .shop-features { margin-bottom: 24px; }
+    .shop-features h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 10px; font-weight: 700; }
+    .shop-features ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .shop-features li {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.87rem; color: var(--text); line-height: 1.4;
+    }
+    .shop-features li::before {
+      content: '✓';
+      width: 18px; height: 18px; border-radius: 50%; background: rgba(247,148,29,0.12);
+      color: var(--orange); font-size: 0.7rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .shop-card-btns { display: flex; gap: 10px; margin-top: auto; }
+    .shop-card-btns .btn { flex: 1; padding: 12px 16px; font-size: 0.9rem; }
+
+    /* ===== CTA BANNER ===== */
+    .cta-banner {
+      background: var(--orange);
+      padding: 64px 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+    .cta-banner::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .cta-banner-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .cta-banner h2 { font-size: clamp(2rem, 4vw, 3rem); color: var(--white); margin-bottom: 12px; }
+    .cta-banner p { font-size: 1.15rem; color: rgba(255,255,255,0.9); margin-bottom: 32px; line-height: 1.6; }
+    .cta-banner-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-banner-btns .btn { font-size: 1rem; padding: 14px 32px; }
+
+    /* ===== FOOTER ===== */
+    .footer { background: var(--navy); color: rgba(255,255,255,0.75); padding: 64px 5% 32px; }
+    .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 48px; margin-bottom: 48px; }
+    .footer-logo img { height: 56px; width: auto; margin-bottom: 16px; }
+    .footer-tagline { font-size: 0.9rem; line-height: 1.7; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 10px; }
+    .social-btn { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--white); transition: background 0.2s; cursor: pointer; border: none; }
+    .social-btn:hover { background: var(--orange); }
+    .footer-col h4 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; color: var(--white); margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 0.88rem; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; font-size: 0.88rem; }
+    .footer-contact-item .ico { font-size: 1rem; margin-top: 1px; flex-shrink: 0; }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .page-hero-content > * { animation: fadeSlideUp 0.8s ease both; }
+    .page-hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+    .page-hero-content > *:nth-child(2) { animation-delay: 0.25s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="pureplay.png" alt="Pure Play Rentals" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="shop.html" class="nav-link" style="color:var(--orange);">Shop</a></li>
+      <li><a href="book.html" class="nav-link">Book</a></li>
+      <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      <li><a href="book.html" class="btn btn-orange" style="padding:10px 22px;font-size:0.9rem;">Book Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="book.html">Book</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="book.html" class="btn btn-orange">Book Now</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1>Browse Our Rentals</h1>
+      <p>Pick the perfect inflatable for your event — we deliver, set up, and come back to take it all down.</p>
+    </div>
+    <div class="page-hero-curve">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,60 L0,30 Q360,0 720,28 Q1080,56 1440,15 L1440,60 Z" fill="#f9fafb"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="bounce">Bounce Houses</button>
+      <button class="filter-pill" data-filter="combo">Combos</button>
+      <button class="filter-pill" data-filter="water">Water Slides</button>
+    </div>
+  </div>
+
+  <!-- SHOP GRID -->
+  <section class="shop-section">
+    <div class="shop-inner">
+      <div class="shop-header">
+        <h2>All Rentals <span style="color:var(--orange);">(3)</span></h2>
+        <p>All inflatables are commercial-grade, sanitized, and inspected before every delivery.</p>
+      </div>
+      <div class="shop-grid" id="shopGrid">
+
+        <!-- CARD 1: Dry Combo -->
+        <div class="shop-card" data-category="combo bounce">
+          <div class="shop-card-img">
+            <img src="product-shot.png" alt="Rainbow Combo Dry" loading="lazy" />
+            <span class="shop-badge" style="background:var(--orange);">Most Popular</span>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-top">
+              <h3 class="shop-card-title">Rainbow Combo — Dry</h3>
+              <div class="shop-price">$225<small>/day</small></div>
+            </div>
+            <p class="shop-card-desc">Our flagship inflatable combo — bounce house, climbing wall, and dry slide all in one. Built for serious fun and designed to keep kids entertained for hours.</p>
+            <div class="shop-specs">
+              <div class="shop-spec">📐 15×15 ft</div>
+              <div class="shop-spec">👦 Ages 3–14</div>
+              <div class="shop-spec">👥 Up to 8 kids</div>
+            </div>
+            <div class="shop-features">
+              <h4>What's Included</h4>
+              <ul>
+                <li>Full bounce room with mesh walls</li>
+                <li>Climbing wall with handholds</li>
+                <li>Dry slide (closed)</li>
+                <li>Delivery, setup &amp; takedown</li>
+                <li>Safety stakes &amp; blower</li>
+                <li>Up to 8 hours rental time</li>
+              </ul>
+            </div>
+            <div class="shop-card-btns">
+              <a href="book.html" class="btn btn-outline-orange">Check Availability</a>
+              <a href="book.html" class="btn btn-orange">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: Wet Combo -->
+        <div class="shop-card" data-category="combo water">
+          <div class="shop-card-img">
+            <img src="product-shot.png" alt="Rainbow Combo Wet" loading="lazy" />
+            <span class="shop-badge" style="background:var(--red);">Summer Special</span>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-top">
+              <h3 class="shop-card-title">Rainbow Combo — Wet / Water Slide</h3>
+              <div class="shop-price">$275<small>/day</small></div>
+            </div>
+            <p class="shop-card-desc">The ultimate summer setup. Same great combo with a soaking water slide and splash pool attached. Perfect for hot days when kids need to cool off in style.</p>
+            <div class="shop-specs">
+              <div class="shop-spec">📐 18×18 ft</div>
+              <div class="shop-spec">👦 Ages 5–16</div>
+              <div class="shop-spec">💧 Water slide</div>
+            </div>
+            <div class="shop-features">
+              <h4>What's Included</h4>
+              <ul>
+                <li>Full bounce room with windows</li>
+                <li>Soaking water slide with pool</li>
+                <li>Built-in sprinkler system</li>
+                <li>Delivery, setup &amp; takedown</li>
+                <li>Garden hose hookup required</li>
+                <li>Up to 8 hours rental time</li>
+              </ul>
+            </div>
+            <div class="shop-card-btns">
+              <a href="book.html" class="btn btn-outline-orange">Check Availability</a>
+              <a href="book.html" class="btn btn-orange">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3: Standard -->
+        <div class="shop-card" data-category="bounce">
+          <div class="shop-card-img">
+            <img src="product-shot.png" alt="Rainbow Combo Standard" loading="lazy" />
+            <span class="shop-badge" style="background:#22c55e;">Great for Toddlers</span>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-top">
+              <h3 class="shop-card-title">Rainbow Combo — Standard</h3>
+              <div class="shop-price">$185<small>/day</small></div>
+            </div>
+            <p class="shop-card-desc">Pure bouncing fun — stripped back to the essentials. Smaller footprint makes it ideal for tighter backyards and younger birthday parties.</p>
+            <div class="shop-specs">
+              <div class="shop-spec">📐 13×13 ft</div>
+              <div class="shop-spec">👦 Ages 2–12</div>
+              <div class="shop-spec">👥 Up to 6 kids</div>
+            </div>
+            <div class="shop-features">
+              <h4>What's Included</h4>
+              <ul>
+                <li>Spacious bounce room</li>
+                <li>Mesh safety windows all around</li>
+                <li>Padded entry ramp</li>
+                <li>Delivery, setup &amp; takedown</li>
+                <li>Safety stakes &amp; blower</li>
+                <li>Up to 8 hours rental time</li>
+              </ul>
+            </div>
+            <div class="shop-card-btns">
+              <a href="book.html" class="btn btn-outline-orange">Check Availability</a>
+              <a href="book.html" class="btn btn-orange">Book Now</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="cta-banner-inner">
+      <h2>Questions? We're Here.</h2>
+      <p>Not sure which bounce house is right for your yard or your group? Give us a call or text — we'll help you pick the perfect setup.</p>
+      <div class="cta-banner-btns">
+        <a href="tel:6785550123" class="btn btn-navy" style="font-size:1.05rem;padding:15px 32px;">📞 (678) 555-0123</a>
+        <a href="book.html" class="btn btn-outline-white" style="font-size:1.05rem;padding:15px 32px;">Book Now →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="contact">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="pureplay.png" alt="Pure Play Rentals" /></div>
+        <p class="footer-tagline">Bringing the bounce to backyards, parks, and events across the greater Atlanta area. Safe, clean, and certified inflatables for every occasion.</p>
+        <div class="footer-social">
+          <button class="social-btn">f</button>
+          <button class="social-btn">ig</button>
+          <button class="social-btn">tk</button>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="book.html">Book Now</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Rentals</h4>
+        <ul class="footer-links">
+          <li><a href="shop.html">Bounce Houses</a></li>
+          <li><a href="shop.html">Combos</a></li>
+          <li><a href="shop.html">Water Slides</a></li>
+          <li><a href="shop.html">All Products</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item"><span class="ico">📞</span><span>(678) 555-0123</span></div>
+        <div class="footer-contact-item"><span class="ico">✉️</span><span>hello@pureplayrentals.com</span></div>
+        <div class="footer-contact-item"><span class="ico">📍</span><span>Serving Greater Atlanta &amp; Gainesville, GA</span></div>
+        <div class="footer-contact-item"><span class="ico">🕐</span><span>Mon–Sun: 7am – 9pm</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Pure Play Rentals. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Service</span>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+    // init scrolled if already scrolled (page refresh)
+    if (window.scrollY > 40) navbar.classList.add('scrolled');
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    // Filter pills
+    const pills = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.shop-card');
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filter = pill.dataset.filter;
+        cards.forEach(card => {
+          const cats = card.dataset.category || '';
+          if (filter === 'all' || cats.includes(filter)) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.dataset.delay || 0);
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach((el, i) => {
+      el.dataset.delay = i * 150;
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
