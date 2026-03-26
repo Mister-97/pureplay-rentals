@@ -9,6 +9,7 @@
   <!-- Legal pages -->
   <url><loc>https://www.pureplayrentals.com/privacy</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
   <url><loc>https://www.pureplayrentals.com/terms</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/waiver</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
   <!-- City landing pages -->
   <url><loc>https://www.pureplayrentals.com/naperville</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.pureplayrentals.com/schaumburg</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>

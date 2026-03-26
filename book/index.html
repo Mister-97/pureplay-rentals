@@ -777,7 +777,7 @@
               </div>
               <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" placeholder="(773) 584-7821" />
+                <input type="tel" id="phone" placeholder="support@pureplayrentals.com" />
                 <div class="form-error" id="err-phone">Please enter your phone number.</div>
               </div>
               <div class="form-group">
@@ -797,7 +797,7 @@
                 <label class="waiver-check-label" id="waiverLabel">
                   <input type="checkbox" id="waiverCheck" onchange="clearWaiverErr()" />
                   <span class="waiver-custom-check" id="waiverCustomCheck"></span>
-                  I have read and agree to the liability waiver above
+                  I have read and agree to the <a href="/waiver" target="_blank" style="color:var(--orange);font-weight:700;">Liability Waiver</a>
                 </label>
                 <div class="form-error" id="err-waiver" style="margin-top:6px;">You must agree to the liability waiver to continue.</div>
               </div>
@@ -807,29 +807,14 @@
               <div class="payment-section">
                 <h3>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                  Payment Details
+                  $100 Deposit to Hold Your Date
                 </h3>
-                <div class="form-group">
-                  <label for="cardName">Name on Card</label>
-                  <input type="text" id="cardName" placeholder="Sarah Johnson" />
-                  <div class="form-error" id="err-cardName">Please enter the name on your card.</div>
+                <div style="background:rgba(247,148,29,0.08);border:1.5px solid rgba(247,148,29,0.3);border-radius:12px;padding:16px 18px;margin-bottom:16px;font-size:0.9rem;color:#374151;line-height:1.6;">
+                  <strong style="color:var(--navy);display:block;margin-bottom:4px;">How it works:</strong>
+                  A <strong>$100 non-refundable deposit</strong> is required to hold your date. The remaining balance of $200 is due on the day of your event. You will be redirected to our secure payment page to complete your deposit.
                 </div>
-                <div class="form-group">
-                  <label for="cardNum">Card Number</label>
-                  <input type="text" id="cardNum" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNum(this)" />
-                  <div class="form-error" id="err-cardNum">Please enter a valid 16-digit card number.</div>
-                </div>
-                <div class="card-row">
-                  <div class="form-group">
-                    <label for="cardExpiry">Expiry</label>
-                    <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)" />
-                    <div class="form-error" id="err-cardExpiry">Enter a valid expiry (MM/YY).</div>
-                  </div>
-                  <div class="form-group">
-                    <label for="cardCvv">CVV</label>
-                    <input type="text" id="cardCvv" placeholder="123" maxlength="4" />
-                    <div class="form-error" id="err-cardCvv">Enter your CVV.</div>
-                  </div>
+                <div style="background:rgba(232,39,44,0.06);border:1.5px solid rgba(232,39,44,0.2);border-radius:10px;padding:12px 16px;font-size:0.82rem;color:#b91c1c;">
+                  <strong>Note:</strong> All deposits are non-refundable. See our <a href="/terms" target="_blank" style="color:#b91c1c;font-weight:700;">cancellation policy</a>.
                 </div>
               </div>
             </div>
@@ -861,13 +846,22 @@
                 <span class="si-val" style="color:#22c55e;">FREE</span>
               </div>
               <hr class="summary-divider" />
+              <div class="summary-item">
+                <span class="si-label">Deposit Due Now</span>
+                <span class="si-val" style="color:var(--orange);font-weight:800;">$100</span>
+              </div>
+              <div class="summary-item">
+                <span class="si-label">Balance Due Day Of</span>
+                <span class="si-val">$200</span>
+              </div>
+              <hr class="summary-divider" />
               <div class="summary-total">
                 <span class="st-label">Total</span>
                 <span class="st-price" id="summaryTotal">-</span>
               </div>
               <div class="security-note">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                256-bit SSL encrypted and processed securely.
+                Deposit is non-refundable. Balance due on event day.
               </div>
             </div>
 
@@ -936,7 +930,7 @@
           <span class="ico">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 5.55 5.55l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
           </span>
-          <span><a href="tel:+17735847821" style="color:inherit;">(773) 584-7821</a></span>
+          <span><a support@pureplayrentals.com style="color:inherit;">support@pureplayrentals.com</a></span>
         </div>
         <div class="footer-contact-item">
           <span class="ico">
@@ -1001,7 +995,7 @@
       });
       state.step = n;
       document.getElementById('btnBack').style.display = n > 1 ? 'inline-flex' : 'none';
-      document.getElementById('btnNext').textContent = n === 4 ? 'Confirm Booking' : 'Continue';
+      document.getElementById('btnNext').textContent = n === 4 ? 'Continue to Deposit →' : 'Continue';
       if (n === 4) populateSummary();
       window.scrollTo({ top: document.getElementById('wizardWrap').offsetTop - 88, behavior: 'smooth' });
     }
@@ -1250,9 +1244,12 @@
       if (inp) inp.classList.toggle('error', show);
     }
 
+    // Stripe payment link — paste your Stripe Payment Link URL here
+    const STRIPE_DEPOSIT_LINK = 'https://buy.stripe.com/REPLACE_WITH_YOUR_STRIPE_LINK';
+
     function validateStep4() {
       let valid = true;
-      const required = ['firstName','lastName','email','phone','address','cardName','cardNum','cardExpiry','cardCvv'];
+      const required = ['firstName','lastName','email','phone','address'];
       required.forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
@@ -1264,16 +1261,6 @@
       const email = document.getElementById('email').value;
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showErr('email', true); valid = false;
-      }
-
-      const card = document.getElementById('cardNum').value.replace(/\s/g,'');
-      if (card.length !== 16 || !/^\d+$/.test(card)) {
-        showErr('cardNum', true); valid = false;
-      }
-
-      const expiry = document.getElementById('cardExpiry').value;
-      if (!/^\d{2}\/\d{2}$/.test(expiry)) {
-        showErr('cardExpiry', true); valid = false;
       }
 
       // Waiver check
@@ -1331,17 +1318,24 @@
       });
 
       if (error) {
-        btn.textContent = 'Confirm Booking';
+        btn.textContent = 'Continue to Deposit →';
         btn.disabled = false;
-        alert('Something went wrong. Please try again or call us at (773) 584-7821.');
+        alert('Something went wrong. Please try again or email support@pureplayrentals.com.');
         return;
       }
 
-      // Invalidate availability cache for this month so calendar refreshes if they go back
+      // Invalidate availability cache for this month
       const monthKey = `${state.selectedDate.y}-${String(state.selectedDate.m+1).padStart(2,'0')}`;
       delete availabilityCache[monthKey];
 
-      showSuccessScreen();
+      // Redirect to Stripe for $100 non-refundable deposit
+      const firstName = document.getElementById('firstName').value.trim();
+      const emailVal  = document.getElementById('email').value.trim();
+      const params = new URLSearchParams({
+        prefilled_email: emailVal,
+        client_reference_id: `${firstName}_${dateStr}_${state.selectedTime}`,
+      });
+      window.location.href = `${STRIPE_DEPOSIT_LINK}?${params.toString()}`;
     }
 
     function showSuccessScreen() {
