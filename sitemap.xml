@@ -4,6 +4,7 @@
   <url><loc>https://www.pureplayrentals.com/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
   <url><loc>https://www.pureplayrentals.com/shop</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
   <url><loc>https://www.pureplayrentals.com/book</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
   <!-- Legal pages -->
   <url><loc>https://www.pureplayrentals.com/privacy</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
   <url><loc>https://www.pureplayrentals.com/terms</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
@@ -16,4 +17,32 @@
   <url><loc>https://www.pureplayrentals.com/arlington-heights</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.pureplayrentals.com/bolingbrook</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.pureplayrentals.com/tinley-park</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <!-- Blog posts - Tips & Advice -->
+  <url><loc>https://www.pureplayrentals.com/blog/chicago-bounce-house-birthday-party</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-cost-chicago</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-safety-tips</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/waterslide-vs-bounce-house</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/how-far-in-advance-book-bounce-house</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/whats-included-bounce-house-rental</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-party-checklist</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/kids-birthday-party-ideas-chicagoland</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/backyard-party-planning-chicago</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/best-parks-chicago-bounce-house-party</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <!-- Blog posts - City guides -->
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-chicago</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-naperville</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-schaumburg</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-aurora</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-joliet</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-orland-park</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-arlington-heights</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-bolingbrook</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-tinley-park</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-elmhurst</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-oak-park</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-westchester</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-oak-lawn</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-cicero</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-berwyn</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.pureplayrentals.com/blog/bounce-house-rental-lombard</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
 </urlset>
