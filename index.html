@@ -1281,7 +1281,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg">
-      <video autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <video autoplay muted loop playsinline webkit-playsinline preload="auto" aria-hidden="true">
         <source src="bounce-house-rental-chicago.mp4" type="video/mp4">
       </video>
     </div>
@@ -1889,6 +1889,19 @@
       });
     });
   </script>
-
+  <script>
+    (function() {
+      var v = document.querySelector('.hero-bg video');
+      if (!v) return;
+      v.muted = true;
+      v.setAttribute('playsinline', '');
+      v.setAttribute('webkit-playsinline', '');
+      function tryPlay() { v.play().catch(function(){}); }
+      tryPlay();
+      v.addEventListener('canplay', tryPlay, { once: true });
+      document.addEventListener('touchstart', tryPlay, { once: true });
+      document.addEventListener('scroll', tryPlay, { once: true });
+    })();
+  </script>
 </body>
 </html>
