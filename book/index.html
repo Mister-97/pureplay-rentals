@@ -1304,7 +1304,7 @@
         ? `${state.selectedDate.y}-${String(state.selectedDate.m+1).padStart(2,'0')}-${String(state.selectedDate.d).padStart(2,'0')}`
         : null;
 
-      const { error } = await _supa.from('bookings').insert({
+      const { data: bookingData, error } = await _supa.from('bookings').insert({
         booking_date:    dateStr,
         time_slot:       state.selectedTime,
         inflatable_name: inf.name,
@@ -1315,7 +1315,7 @@
         phone:           document.getElementById('phone').value.trim(),
         address:         document.getElementById('address').value.trim(),
         status:          'pending',
-      });
+      }).select('id').single();
 
       if (error) {
         btn.textContent = 'Continue to Deposit →';
@@ -1329,11 +1329,11 @@
       delete availabilityCache[monthKey];
 
       // Redirect to Stripe for $100 non-refundable deposit
-      const firstName = document.getElementById('firstName').value.trim();
-      const emailVal  = document.getElementById('email').value.trim();
+      // client_reference_id = booking row ID so the webhook can match it exactly
+      const emailVal = document.getElementById('email').value.trim();
       const params = new URLSearchParams({
-        prefilled_email: emailVal,
-        client_reference_id: `${firstName}_${dateStr}_${state.selectedTime}`,
+        prefilled_email:      emailVal,
+        client_reference_id:  String(bookingData.id),
       });
       window.location.href = `${STRIPE_DEPOSIT_LINK}?${params.toString()}`;
     }
