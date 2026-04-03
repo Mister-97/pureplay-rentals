@@ -1244,8 +1244,7 @@
       if (inp) inp.classList.toggle('error', show);
     }
 
-    // Stripe payment link — paste your Stripe Payment Link URL here
-    const STRIPE_DEPOSIT_LINK = 'https://buy.stripe.com/REPLACE_WITH_YOUR_STRIPE_LINK';
+    const STRIPE_PUBLISHABLE_KEY = 'pk_test_51THBA9RzIwf1pJLmcLIRee3I4J596tZ2OfMTVYwPkrEXqHQIv4ubh8xCv5HCYO3w9ww7WwnkUuxme0ZJcKOzRV67000KOCURKB';
 
     function validateStep4() {
       let valid = true;
@@ -1304,7 +1303,7 @@
         ? `${state.selectedDate.y}-${String(state.selectedDate.m+1).padStart(2,'0')}-${String(state.selectedDate.d).padStart(2,'0')}`
         : null;
 
-      const { data: bookingData, error } = await _supa.from('bookings').insert({
+      const { error } = await _supa.from('bookings').insert({
         booking_date:    dateStr,
         time_slot:       state.selectedTime,
         inflatable_name: inf.name,
@@ -1314,8 +1313,13 @@
         email:           document.getElementById('email').value.trim(),
         phone:           document.getElementById('phone').value.trim(),
         address:         document.getElementById('address').value.trim(),
-        status:          'pending',
-      }).select('id').single();
+        status:            'pending',
+        waiver_agreed:     true,
+        waiver_agreed_at:  new Date().toISOString(),
+        user_agent:        navigator.userAgent || null,
+        referrer:          document.referrer || null,
+        terms_version:     'v1-2026-03-25',
+      });
 
       if (error) {
         btn.textContent = 'Continue to Deposit →';
@@ -1328,14 +1332,32 @@
       const monthKey = `${state.selectedDate.y}-${String(state.selectedDate.m+1).padStart(2,'0')}`;
       delete availabilityCache[monthKey];
 
-      // Redirect to Stripe for $100 non-refundable deposit
-      // client_reference_id = booking row ID so the webhook can match it exactly
-      const emailVal = document.getElementById('email').value.trim();
-      const params = new URLSearchParams({
-        prefilled_email:      emailVal,
-        client_reference_id:  String(bookingData.id),
+      // Create Stripe Checkout Session and redirect
+      const inf = INFLATABLES[state.selectedInf];
+      const res = await fetch('/api/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName:    document.getElementById('firstName').value.trim(),
+          lastName:     document.getElementById('lastName').value.trim(),
+          email:        document.getElementById('email').value.trim(),
+          phone:        document.getElementById('phone').value.trim(),
+          address:      document.getElementById('address').value.trim(),
+          eventDate:    dateStr,
+          rentalItem:   inf.name,
+          depositAmount: 100,
+          totalAmount:  inf.price,
+          notes:        state.bannerText || '',
+        }),
       });
-      window.location.href = `${STRIPE_DEPOSIT_LINK}?${params.toString()}`;
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        btn.textContent = 'Continue to Deposit →';
+        btn.disabled = false;
+        alert('Payment setup failed. Please try again or email support@pureplayrentals.com.');
+      }
     }
 
     function showSuccessScreen() {
