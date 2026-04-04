@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
         totalAmount: String(totalAmount),
         notes: notes || ''
       },
-      success_url: `${process.env.SITE_URL}/book?success=1`,
+      success_url: `${process.env.SITE_URL}/thank-you`,
       cancel_url: `${process.env.SITE_URL}/book`,
     })
 

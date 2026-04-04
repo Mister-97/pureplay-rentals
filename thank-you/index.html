@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Confirmed — Pure Play Rentals</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1f3c;
+      --orange: #f7941d;
+      --orange-dark: #d97a0f;
+      --green: #16a34a;
+      --white: #ffffff;
+      --light: #f9fafb;
+      --gray: #f3f4f6;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --radius: 16px;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .card {
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: 0 12px 48px rgba(13,31,60,0.12);
+      max-width: 560px;
+      width: 100%;
+      padding: 48px 40px;
+      text-align: center;
+    }
+    .check-circle {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px;
+      box-shadow: 0 8px 24px rgba(34,197,94,0.35);
+      animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    h1 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    /* Booking details */
+    .details {
+      background: var(--light);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 18px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label { color: var(--muted); font-weight: 500; }
+    .detail-val { font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--navy); }
+    .detail-val.green { color: var(--green); }
+    .detail-val.orange { color: var(--orange); }
+
+    /* Invoice notice */
+    .invoice-notice {
+      background: linear-gradient(135deg, rgba(247,148,29,0.08), rgba(247,148,29,0.04));
+      border: 1.5px solid rgba(247,148,29,0.3);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .invoice-notice .notice-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .invoice-notice p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 13px 28px; border-radius: 50px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem;
+      cursor: pointer; transition: all 0.22s; border: none; text-decoration: none;
+    }
+    .btn-orange { background: var(--orange); color: var(--white); }
+    .btn-orange:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(247,148,29,0.4); }
+    .btn-ghost { background: var(--gray); color: var(--muted); margin-left: 12px; }
+    .btn-ghost:hover { background: #e5e7eb; }
+    .btns { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+
+    .logo { margin-bottom: 32px; }
+    .logo img { height: 52px; width: auto; margin: 0 auto; }
+
+    @media (max-width: 480px) {
+      .card { padding: 36px 24px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <img src="../pureplay.png" alt="Pure Play Rentals" />
+    </div>
+
+    <div class="check-circle">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+
+    <h1>You're All Booked! 🎉</h1>
+    <p class="subtitle">Your deposit is confirmed and your bounce house is reserved. A confirmation email is on its way to you now.</p>
+
+    <div class="details" id="details">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="invoice-notice">
+      <div class="notice-title">📄 Remaining Balance Invoice</div>
+      <p>The day before your event, we'll send you an invoice for the remaining balance due. You can pay it online or have cash ready on delivery day — whichever works best for you.</p>
+    </div>
+
+    <div class="btns">
+      <a href="/" class="btn btn-orange">Back to Home</a>
+      <a href="tel:+17086695486" class="btn btn-ghost">📞 Call Us</a>
+    </div>
+  </div>
+
+  <script>
+    const raw = sessionStorage.getItem('pp_booking');
+    const details = document.getElementById('details');
+
+    if (raw) {
+      const b = JSON.parse(raw);
+      sessionStorage.removeItem('pp_booking');
+
+      const remaining = (b.total - b.deposit).toFixed(2);
+
+      details.innerHTML = `
+        <div class="detail-row"><span class="detail-label">Name</span><span class="detail-val">${b.firstName} ${b.lastName}</span></div>
+        <div class="detail-row"><span class="detail-label">Email</span><span class="detail-val">${b.email}</span></div>
+        <div class="detail-row"><span class="detail-label">Rental</span><span class="detail-val">${b.item}</span></div>
+        <div class="detail-row"><span class="detail-label">Event Date</span><span class="detail-val">${b.date || '—'}</span></div>
+        <div class="detail-row"><span class="detail-label">Delivery Time</span><span class="detail-val">${b.time || '—'}</span></div>
+        <div class="detail-row"><span class="detail-label">Deposit Paid</span><span class="detail-val green">$${b.deposit}.00 ✓</span></div>
+        <div class="detail-row"><span class="detail-label">Remaining Due</span><span class="detail-val orange">$${remaining} (invoiced day before)</span></div>
+      `;
+    } else {
+      // No session data — show generic confirmation
+      details.innerHTML = `
+        <div class="detail-row"><span class="detail-label">Status</span><span class="detail-val green">Deposit Paid ✓</span></div>
+        <div class="detail-row"><span class="detail-label">Next Step</span><span class="detail-val">Check your email for confirmation</span></div>
+      `;
+    }
+  </script>
+</body>
+</html>

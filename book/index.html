@@ -1175,7 +1175,11 @@
       document.querySelectorAll('.cal-day').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
       state.selectedDate = { d, m, y };
-      state.selectedTime = null;
+      // Only clear time if it's booked on the new date
+      const bookedCheck = getBookedSlotsForDate(y, m, d);
+      if (state.selectedTime && bookedCheck.includes(state.selectedTime)) {
+        state.selectedTime = null;
+      }
       const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       const display = document.getElementById('selectedDateDisplay');
       display.classList.add('show');
@@ -1337,13 +1341,27 @@
       delete availabilityCache[monthKey];
 
       // Create Stripe Checkout Session and redirect
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName  = document.getElementById('lastName').value.trim();
+      const email     = document.getElementById('email').value.trim();
+
+      // Save booking details so thank-you page can display them
+      sessionStorage.setItem('pp_booking', JSON.stringify({
+        firstName, lastName, email,
+        item:    inf.name,
+        date:    dateStr,
+        time:    (TIME_SLOTS.find(s => s.value === state.selectedTime) || {}).label || state.selectedTime,
+        deposit: 100,
+        total:   inf.price,
+      }));
+
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstName:    document.getElementById('firstName').value.trim(),
-          lastName:     document.getElementById('lastName').value.trim(),
-          email:        document.getElementById('email').value.trim(),
+          firstName,
+          lastName,
+          email,
           phone:        document.getElementById('phone').value.trim(),
           address:      document.getElementById('address').value.trim(),
           eventDate:    dateStr,
