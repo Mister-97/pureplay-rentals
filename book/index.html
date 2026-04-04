@@ -1081,8 +1081,12 @@
       const lastDay = new Date(year, month+1, 0).getDate();
       const p_start = `${year}-${String(month+1).padStart(2,'0')}-01`;
       const p_end   = `${year}-${String(month+1).padStart(2,'0')}-${String(lastDay).padStart(2,'0')}`;
-      const { data } = await _supa.rpc('get_availability', { p_start, p_end });
-      availabilityCache[key] = data || [];
+      try {
+        const { data } = await _supa.rpc('get_availability', { p_start, p_end });
+        availabilityCache[key] = data || [];
+      } catch (e) {
+        availabilityCache[key] = [];
+      }
     }
 
     function getBookedSlotsForDate(year, month, day) {
