@@ -79,29 +79,75 @@ async function sendConfirmationEmail(meta, depositPaid) {
     `
   })
 
-  // 2. Owner notification
-  await resend.emails.send({
-    from: 'Pure Play Rentals <bookings@pureplayrentals.com>',
-    to: 'pureplayrentals@gmail.com',
-    subject: `💰 New Booking — ${meta.firstName} ${meta.lastName} | ${meta.eventDate}`,
-    html: `
-      <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;color:#222;">
-        <h2 style="color:#7c3aed;">New Booking Received</h2>
-        <table style="width:100%;border-collapse:collapse;">
-          <tr><td style="padding:8px;font-weight:bold;width:140px;">Name</td><td style="padding:8px;">${meta.firstName} ${meta.lastName}</td></tr>
-          <tr style="background:#f3f4f6;"><td style="padding:8px;font-weight:bold;">Email</td><td style="padding:8px;"><a href="mailto:${meta.email}">${meta.email}</a></td></tr>
-          <tr><td style="padding:8px;font-weight:bold;">Phone</td><td style="padding:8px;"><a href="tel:${meta.phone}">${meta.phone}</a></td></tr>
-          <tr style="background:#f3f4f6;"><td style="padding:8px;font-weight:bold;">Rental Item</td><td style="padding:8px;">${meta.rentalItem}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold;">Event Date</td><td style="padding:8px;">${meta.eventDate}</td></tr>
-          <tr style="background:#f3f4f6;"><td style="padding:8px;font-weight:bold;">Address</td><td style="padding:8px;">${meta.address}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold;">Deposit Paid</td><td style="padding:8px;color:#16a34a;font-weight:bold;">$${depositPaid.toFixed(2)}</td></tr>
-          <tr style="background:#f3f4f6;"><td style="padding:8px;font-weight:bold;">Remaining Due</td><td style="padding:8px;color:#dc2626;font-weight:bold;">$${remainingBalance}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold;">Total</td><td style="padding:8px;">$${parseFloat(meta.totalAmount).toFixed(2)}</td></tr>
-          ${meta.notes ? `<tr style="background:#f3f4f6;"><td style="padding:8px;font-weight:bold;">Notes</td><td style="padding:8px;">${meta.notes}</td></tr>` : ''}
-        </table>
+  // 2. Owner + manager notification
+  const ownerEmailHtml = `
+    <div style="font-family:Arial,sans-serif;max-width:580px;margin:0 auto;color:#222;">
+      <div style="background:#f7941d;padding:20px 24px;border-radius:12px 12px 0 0;">
+        <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.85);font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Pure Play Rentals</p>
+        <h2 style="margin:6px 0 0;color:#fff;font-size:22px;">🏰 New Bounce House Booking!</h2>
       </div>
-    `
-  })
+      <div style="background:#fff;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 12px 12px;padding:24px;">
+        <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+          <p style="margin:0;font-size:15px;color:#15803d;font-weight:bold;">✅ Deposit of $${depositPaid.toFixed(2)} received — booking is confirmed</p>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:14px;">
+          <tr style="background:#fef3c7;">
+            <td style="padding:11px 14px;font-weight:bold;width:140px;border-radius:6px 0 0 6px;">📞 Phone</td>
+            <td style="padding:11px 14px;border-radius:0 6px 6px 0;"><a href="tel:${meta.phone}" style="color:#d97706;font-weight:bold;font-size:16px;text-decoration:none;">${meta.phone}</a></td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px;font-weight:bold;">👤 Customer</td>
+            <td style="padding:11px 14px;">${meta.firstName} ${meta.lastName}</td>
+          </tr>
+          <tr style="background:#f9fafb;">
+            <td style="padding:11px 14px;font-weight:bold;">✉️ Email</td>
+            <td style="padding:11px 14px;"><a href="mailto:${meta.email}" style="color:#4f46e5;">${meta.email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px;font-weight:bold;">🏰 Rental</td>
+            <td style="padding:11px 14px;">${meta.rentalItem}</td>
+          </tr>
+          <tr style="background:#f9fafb;">
+            <td style="padding:11px 14px;font-weight:bold;">📅 Event Date</td>
+            <td style="padding:11px 14px;font-weight:bold;color:#1a1a2e;">${meta.eventDate}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px;font-weight:bold;">📍 Address</td>
+            <td style="padding:11px 14px;">${meta.address}</td>
+          </tr>
+          <tr style="background:#f9fafb;">
+            <td style="padding:11px 14px;font-weight:bold;">💵 Deposit Paid</td>
+            <td style="padding:11px 14px;color:#16a34a;font-weight:bold;">$${depositPaid.toFixed(2)}</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px;font-weight:bold;">💳 Remaining Due</td>
+            <td style="padding:11px 14px;color:#dc2626;font-weight:bold;">$${remainingBalance}</td>
+          </tr>
+          <tr style="background:#f9fafb;">
+            <td style="padding:11px 14px;font-weight:bold;">💰 Total</td>
+            <td style="padding:11px 14px;">$${parseFloat(meta.totalAmount).toFixed(2)}</td>
+          </tr>
+          ${meta.notes ? `<tr><td style="padding:11px 14px;font-weight:bold;">📝 Notes</td><td style="padding:11px 14px;">${meta.notes}</td></tr>` : ''}
+        </table>
+        <p style="margin:20px 0 0;font-size:13px;color:#6b7280;">Call or text the customer to confirm delivery details at least 24 hours before the event.</p>
+      </div>
+    </div>
+  `
+
+  await Promise.all([
+    resend.emails.send({
+      from: 'Pure Play Rentals <bookings@pureplayrentals.com>',
+      to: 'pureplayrentals@gmail.com',
+      subject: `🏰 NEW BOOKING — ${meta.firstName} ${meta.lastName} | ${meta.eventDate} | $${depositPaid.toFixed(2)} paid`,
+      html: ownerEmailHtml,
+    }),
+    resend.emails.send({
+      from: 'Pure Play Rentals <bookings@pureplayrentals.com>',
+      to: 'c4mgmtgroup@gmail.com',
+      subject: `🏰 NEW BOOKING — ${meta.firstName} ${meta.lastName} | ${meta.eventDate} | $${depositPaid.toFixed(2)} paid`,
+      html: ownerEmailHtml,
+    }),
+  ])
 }
 
 module.exports = async (req, res) => {
