@@ -1337,7 +1337,6 @@
       delete availabilityCache[monthKey];
 
       // Create Stripe Checkout Session and redirect
-      const inf = INFLATABLES[state.selectedInf];
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
