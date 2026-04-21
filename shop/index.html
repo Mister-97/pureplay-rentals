@@ -408,6 +408,7 @@
       <button class="filter-pill" data-filter="bounce">Bounce Houses</button>
       <button class="filter-pill" data-filter="combo">Combos</button>
       <button class="filter-pill" data-filter="water">Water Slides</button>
+      <button class="filter-pill" data-filter="obstacle">Obstacle Courses</button>
     </div>
   </div>
 
@@ -415,7 +416,7 @@
   <section class="shop-section">
     <div class="shop-inner">
       <div class="shop-header">
-        <h2>Bounce House Rentals in Chicago <span style="color:var(--orange);">(4)</span></h2>
+        <h2>Bounce House Rentals in Chicago <span id="shopCount" style="color:var(--orange);"></span></h2>
         <p>All inflatables are commercial-grade, sanitized, and inspected before every Chicago delivery. One flat price: $300/day.</p>
       </div>
       <div class="shop-grid" id="shopGrid">
@@ -843,6 +844,12 @@
     // Filter pills
     const pills = document.querySelectorAll('.filter-pill');
     const cards = document.querySelectorAll('.shop-card');
+    const shopCount = document.getElementById('shopCount');
+
+    function updateCount() {
+      const visible = [...cards].filter(c => c.style.display !== 'none').length;
+      shopCount.textContent = '(' + visible + ')';
+    }
 
     pills.forEach(pill => {
       pill.addEventListener('click', () => {
@@ -857,8 +864,11 @@
             card.style.display = 'none';
           }
         });
+        updateCount();
       });
     });
+
+    updateCount();
 
     // Scroll animations
     const observer = new IntersectionObserver((entries) => {
