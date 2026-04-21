@@ -199,6 +199,25 @@
     }
     .shop-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
 
+    .shop-card.coming-soon .shop-card-img img { filter: brightness(0.88) saturate(0.8); }
+    .coming-soon-overlay {
+      position: absolute; inset: 0;
+      background: rgba(13,31,60,0.45);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .coming-soon-pill {
+      background: var(--navy); color: var(--white);
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.85rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 8px 22px; border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+    .coming-soon-btn {
+      flex: 1; padding: 12px 16px; font-size: 0.85rem; text-align: center;
+      background: #f3f4f6; color: #9ca3af; border-radius: 12px;
+      font-family: 'Nunito', sans-serif; font-weight: 800;
+    }
+
     .shop-card-img {
       position: relative;
       aspect-ratio: 16/10;
@@ -599,6 +618,130 @@
             <div class="shop-card-btns" style="margin-top:auto;padding-top:20px;">
               <a support@pureplayrentals.com class="btn btn-navy" style="pointer-events:all;">Join Waitlist</a>
             </div>
+          </div>
+        </div>
+
+        <!-- COMING SOON: Obstacle Course 3+1 -->
+        <div class="shop-card coming-soon" data-category="obstacle">
+          <div class="shop-card-img">
+            <img src="../obstacle-course-3-1.png" alt="Obstacle Course 3+1 Commercial Inflatable" loading="lazy" />
+            <div class="coming-soon-overlay"><span class="coming-soon-pill">Coming Soon</span></div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-top">
+              <h3 class="shop-card-title">Obstacle Course 3+1 — Commercial</h3>
+              <div class="shop-price" style="color:var(--muted);font-size:1rem;">TBA</div>
+            </div>
+            <p class="shop-card-desc">79-ft monster obstacle course with crawling tunnels, pop-up obstacles, squeeze-throughs, and a massive 16-ft slide at the finish. Two-piece separable design. Wet or dry use.</p>
+            <div class="shop-specs">
+              <div class="shop-spec">📐 79×11 ft</div>
+              <div class="shop-spec">📏 16 ft slide</div>
+              <div class="shop-spec">💧 Wet / Dry</div>
+            </div>
+            <div class="shop-features">
+              <h4>What's Included</h4>
+              <ul>
+                <li>Crawling tunnels & pop-up obstacles</li>
+                <li>Squeeze-through challenges</li>
+                <li>16-ft tall slide finish</li>
+                <li>Two-piece separable design</li>
+                <li>Delivery, setup & takedown</li>
+              </ul>
+            </div>
+            <div class="shop-card-btns"><span class="coming-soon-btn">Available Soon — Stay Tuned</span></div>
+          </div>
+        </div>
+
+        <!-- COMING SOON: Tropical Obstacle Course 3+1 -->
+        <div class="shop-card coming-soon" data-category="obstacle">
+          <div class="shop-card-img">
+            <img src="../obstacle-course-tropical.png" alt="Tropical Obstacle Course 3+1" loading="lazy" />
+            <div class="coming-soon-overlay"><span class="coming-soon-pill">Coming Soon</span></div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-top">
+              <h3 class="shop-card-title">Tropical Obstacle Course 3+1 — Commercial</h3>
+              <div class="shop-price" style="color:var(--muted);font-size:1rem;">TBA</div>
+            </div>
+            <p class="shop-card-desc">75-ft tropical jungle obstacle course with palm tree scenery, crawl-throughs, pop-ups, and an 18-ft slide. Same modular two-piece design — but with serious island vibes. Wet or dry.</p>
+            <div class="shop-specs">
+              <div class="shop-spec">📐 75×11 ft</div>
+              <div class="shop-spec">📏 18 ft slide</div>
+              <div class="shop-spec">💧 Wet / Dry</div>
+            </div>
+            <div class="shop-features">
+              <h4>What's Included</h4>
+              <ul>
+                <li>Tropical jungle theme design</li>
+                <li>Crawling tunnels & pop-up obstacles</li>
+                <li>18-ft tall slide finish</li>
+                <li>Two-piece separable design</li>
+                <li>Delivery, setup & takedown</li>
+              </ul>
+            </div>
+            <div class="shop-card-btns"><span class="coming-soon-btn">Available Soon — Stay Tuned</span></div>
+          </div>
+        </div>
+
+        <!-- COMING SOON: 5-in-1 Super Combo Double Lane -->
+        <div class="shop-card coming-soon" data-category="combo">
+          <div class="shop-card-img">
+            <img src="../5in1-super-combo.png" alt="5in1 Super Combo Double Lane" loading="lazy" />
+            <div class="coming-soon-overlay"><span class="coming-soon-pill">Coming Soon</span></div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-top">
+              <h3 class="shop-card-title">5-in-1 Super Combo — Double Lane</h3>
+              <div class="shop-price" style="color:var(--muted);font-size:1rem;">TBA</div>
+            </div>
+            <p class="shop-card-desc">Castle-style commercial combo with 5 activities: bounce room with pop-ups, basketball hoop, double-lane slide, climb wall, and splash pool. Built for large events and big birthday parties.</p>
+            <div class="shop-specs">
+              <div class="shop-spec">📐 33×15 ft</div>
+              <div class="shop-spec">🏀 Basketball hoop</div>
+              <div class="shop-spec">💧 Wet / Dry</div>
+            </div>
+            <div class="shop-features">
+              <h4>What's Included</h4>
+              <ul>
+                <li>Bounce room with pop-ups</li>
+                <li>Double-lane slide</li>
+                <li>Integrated basketball hoop</li>
+                <li>Splash pool attachment</li>
+                <li>Delivery, setup & takedown</li>
+              </ul>
+            </div>
+            <div class="shop-card-btns"><span class="coming-soon-btn">Available Soon — Stay Tuned</span></div>
+          </div>
+        </div>
+
+        <!-- COMING SOON: Fun Course Combo + Pool -->
+        <div class="shop-card coming-soon" data-category="combo obstacle">
+          <div class="shop-card-img">
+            <img src="../fun-course-combo-pool.png" alt="Fun Course Combo + Pool" loading="lazy" />
+            <div class="coming-soon-overlay"><span class="coming-soon-pill">Coming Soon</span></div>
+          </div>
+          <div class="shop-card-body">
+            <div class="shop-card-top">
+              <h3 class="shop-card-title">Fun Course Combo + Pool — Commercial</h3>
+              <div class="shop-price" style="color:var(--muted);font-size:1rem;">TBA</div>
+            </div>
+            <p class="shop-card-desc">57-ft two-in-one setup — obstacle course section connects to a bounce house with water slide and splash pool. The ultimate summer party combo for Chicagoland backyard events.</p>
+            <div class="shop-specs">
+              <div class="shop-spec">📐 57×13 ft</div>
+              <div class="shop-spec">🏊 Splash pool</div>
+              <div class="shop-spec">💧 Wet / Dry</div>
+            </div>
+            <div class="shop-features">
+              <h4>What's Included</h4>
+              <ul>
+                <li>Obstacle course + bounce house combo</li>
+                <li>Water slide with splash pool</li>
+                <li>Two-piece separable design</li>
+                <li>Dry mattress option available</li>
+                <li>Delivery, setup & takedown</li>
+              </ul>
+            </div>
+            <div class="shop-card-btns"><span class="coming-soon-btn">Available Soon — Stay Tuned</span></div>
           </div>
         </div>
 
