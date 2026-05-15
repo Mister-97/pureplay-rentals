@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="/pureplay.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found | Pure Play Rentals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #f7941d;
+      --navy: #1a1a2e;
+      --purple: #7c3aed;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
+      color: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .emoji { font-size: 5rem; margin-bottom: 16px; }
+    h1 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #6b7280;
+      max-width: 420px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      margin: 0 8px 12px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(247,148,29,0.4); }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--navy);
+      color: var(--navy);
+    }
+    .btn-outline:hover { box-shadow: 0 4px 12px rgba(26,26,46,0.15); }
+  </style>
+</head>
+<body>
+  <div class="emoji">🏰</div>
+  <h1>Oops! Page Not Found</h1>
+  <p>Looks like this page bounced away. Let's get you back to the fun.</p>
+  <div>
+    <a href="/" class="btn">Back to Home</a>
+    <a href="/book" class="btn btn-outline">Book Now</a>
+  </div>
+</body>
+</html>

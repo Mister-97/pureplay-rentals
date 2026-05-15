@@ -2,7 +2,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const { Resend } = require('resend')
 
 // Required to read raw body for Stripe signature verification
-export const config = { api: { bodyParser: false } }
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -194,3 +193,5 @@ module.exports = async (req, res) => {
 
   res.status(200).json({ received: true })
 }
+
+module.exports.config = { api: { bodyParser: false } }

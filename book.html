@@ -1041,15 +1041,47 @@
     }
 
     // ====== SUBMIT ======
-    function submitBooking() {
-      // Simulate processing
+    async function submitBooking() {
       const btn = document.getElementById('btnNext');
       btn.textContent = 'Processing...';
       btn.disabled = true;
 
-      setTimeout(() => {
-        showSuccessScreen();
-      }, 1500);
+      const inf = INFLATABLES[state.selectedInf];
+      const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const dateStr = state.selectedDate
+        ? `${MONTHS[state.selectedDate.m]} ${state.selectedDate.d}, ${state.selectedDate.y}`
+        : '';
+      const depositAmount = Math.ceil(inf.price * 0.5);
+      const rentalItem = inf.name + (state.bannerText ? ` + Banner: ${state.bannerText}` : '');
+
+      try {
+        const res = await fetch('/api/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            address: document.getElementById('address').value,
+            eventDate: dateStr,
+            rentalItem,
+            depositAmount,
+            totalAmount: inf.price,
+            notes: '',
+          }),
+        });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'Checkout failed');
+        }
+      } catch (err) {
+        alert('Something went wrong: ' + err.message + '\nPlease try again or call us at (773) 584-7821.');
+        btn.textContent = 'Pay Deposit & Confirm';
+        btn.disabled = false;
+      }
     }
 
     function showSuccessScreen() {
