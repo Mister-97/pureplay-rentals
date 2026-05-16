@@ -133,20 +133,12 @@ async function sendConfirmationEmail(meta, depositPaid) {
     </div>
   `
 
-  await Promise.all([
-    resend.emails.send({
-      from: 'Pure Play Rentals <bookings@pureplayrentals.com>',
-      to: 'pureplayrentals@gmail.com',
-      subject: `🏰 NEW BOOKING — ${meta.firstName} ${meta.lastName} | ${meta.eventDate} | $${depositPaid.toFixed(2)} paid`,
-      html: ownerEmailHtml,
-    }),
-    resend.emails.send({
-      from: 'Pure Play Rentals <bookings@pureplayrentals.com>',
-      to: 'c4mgmtgroup@gmail.com',
-      subject: `🏰 NEW BOOKING — ${meta.firstName} ${meta.lastName} | ${meta.eventDate} | $${depositPaid.toFixed(2)} paid`,
-      html: ownerEmailHtml,
-    }),
-  ])
+  await resend.emails.send({
+    from: 'Pure Play Rentals <bookings@pureplayrentals.com>',
+    to: ['pureplayrentals@gmail.com', 'c4mgmtgroup@gmail.com', 'support@c4service.co'],
+    subject: `🏰 NEW BOOKING — ${meta.firstName} ${meta.lastName} | ${meta.eventDate} | $${depositPaid.toFixed(2)} paid`,
+    html: ownerEmailHtml,
+  })
 }
 
 module.exports = async (req, res) => {
